@@ -44,21 +44,19 @@
       font-weight: bold;
       letter-spacing: 2px;
       text-decoration: none;
-
-      &::after {
-        content: ""; /* Necesario para que el pseudo-elemento aparezca */
-        position: absolute; /* Lo posiciona en relación al elemento padre */
-        left: 0;
-        bottom: -2px; /* Ajusta la posición de la línea subrayada según sea necesario */
-        width: 0; /* Ancho inicial de la línea subrayada */
-        height: 2px; /* Altura de la línea subrayada */
-        background-color: white; /* Tu color oscuro */ /* Color de fondo de la línea subrayada */
-        transition: width 0.9s ease; /* Transición para el ancho de la línea subrayada */
-      }
-
-      &:hover::after {
-        width: 100%; /* Ancho completo de la línea subrayada al hacer hover */
-      }
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .popcorn {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    &_text {
+      text-align: center;
+    }
+    &_icon {
+      margin-bottom: 10px;
     }
   }
 }

@@ -5,11 +5,25 @@
   width: fit-content;
   &_text {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 15px;
-    div {
+    :first-child {
       justify-content: center;
-      width: 500px;
+      width: 50%;
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .general {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    &_text {
+      display: flex;
+      flex-direction: column;
+      :first-child {
+        width: 100%;
+      }
     }
   }
 }

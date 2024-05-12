@@ -16,14 +16,12 @@ export const TextInputButton = ({
     <div className={styles.general}>
       <GretaText color={textColor} variant={textVariant} content={title} />
       <div className={styles.general_text}>
-        <div>
-          <TextField
-            fullWidth
-            label={placeholder}
-            variant={variant}
-            placeholder={placeholder}
-          />
-        </div>
+        <TextField
+          fullWidth
+          label={placeholder}
+          variant={variant}
+          placeholder={placeholder}
+        />
         <GretaButton href={href}>{textButton}</GretaButton>
       </div>
     </div>

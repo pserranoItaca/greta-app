@@ -1,5 +1,5 @@
 import { GretaText, TextInputButton } from "@/components";
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import PopCorn from "@/components/icons/PopCorn";
 import styles from "./SectionTittle.module.scss";
 import Link from "next/link";
@@ -12,8 +12,8 @@ const SectionTitle = () => {
   ];
   return (
     <>
-      <div className={styles.general}>
-        <div className={styles.general_text}>
+      <Box sx={{ display: "flex" }} className={styles.general}>
+        <Box className={styles.general_text}>
           <GretaText
             content={
               "DISFRUTA DEL MEJOR CINE Y LAS MEJORES SERIES INDEPENDIENTES"
@@ -26,8 +26,8 @@ const SectionTitle = () => {
             variant={"subtitle"}
             color={"light"}
           />
-        </div>
-        <div className={styles.general_email}>
+        </Box>
+        <Box className={styles.general_email}>
           <TextInputButton
             textVariant="subtitle"
             placeholder="Dirección de correo"
@@ -37,20 +37,20 @@ const SectionTitle = () => {
             textColor={"dark"}
             variant={"outlined"}
           />
-        </div>
-      </div>
-      <div className={styles.popcorn}>
-        <div className={styles.popcorn_icon}>
+        </Box>
+      </Box>
+      <Box className={styles.popcorn}>
+        <Box className={styles.popcorn_icon}>
           <PopCorn />
-        </div>
-        <div className={styles.popcorn_text}>
+        </Box>
+        <Box className={styles.popcorn_text}>
           {mapText.map((item, index) => (
             <Link className={styles.popcorn_text_link} href={""} key={index}>
               {item}
             </Link>
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </>
   );
 };
