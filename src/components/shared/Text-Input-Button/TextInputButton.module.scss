@@ -1,0 +1,15 @@
+.general {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: fit-content;
+  &_text {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    div {
+      justify-content: center;
+      width: 500px;
+    }
+  }
+}

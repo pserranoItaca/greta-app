@@ -1,0 +1,64 @@
+@import "variables";
+
+.general {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+  background-color: $backGroundDark;
+
+  &_text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 5vh;
+  }
+  &_email {
+    padding: 10vh;
+    background-color: white;
+  }
+}
+.popcorn {
+  height: fit-content;
+  background-color: #d6a8a8;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2%;
+  &_icon {
+    margin-top: 15px;
+  }
+
+  &_text {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    color: $lightColor;
+    &_link {
+      margin-top: 15px;
+      color: $lightColor;
+      text-decoration: none;
+      font-size: 20px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-decoration: none;
+
+      &::after {
+        content: ""; /* Necesario para que el pseudo-elemento aparezca */
+        position: absolute; /* Lo posiciona en relación al elemento padre */
+        left: 0;
+        bottom: -2px; /* Ajusta la posición de la línea subrayada según sea necesario */
+        width: 0; /* Ancho inicial de la línea subrayada */
+        height: 2px; /* Altura de la línea subrayada */
+        background-color: white; /* Tu color oscuro */ /* Color de fondo de la línea subrayada */
+        transition: width 0.9s ease; /* Transición para el ancho de la línea subrayada */
+      }
+
+      &:hover::after {
+        width: 100%; /* Ancho completo de la línea subrayada al hacer hover */
+      }
+    }
+  }
+}

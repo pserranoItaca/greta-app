@@ -1,13 +1,5 @@
-import Footer from "@/components/Footer/Footer";
+import GretaApp from "./App";
 
 export default function Home() {
-  return (
-    <>
-      <h1>Home!</h1>
-      <div>
-        <section></section>
-        <Footer></Footer>
-      </div>
-    </>
-  );
+  return <GretaApp />;
 }
