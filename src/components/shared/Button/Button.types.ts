@@ -1,8 +1,3 @@
-import { ButtonProps, SxProps, Theme } from "@mui/material";
-import { MouseEventHandler } from "react";
+import { ButtonProps as MantineButtonProps } from "@mantine/core";
 
-export interface GretaButtonProps {
-  children?: React.ReactNode;
-  href?: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-}
+export interface ButtonProps extends MantineButtonProps {}

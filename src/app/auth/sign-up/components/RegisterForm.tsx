@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { UserModel } from "@/lib/models/User";
+import { UserModel } from "@/infraestructure/models/User";
 import Link from "next/link";
 import styles from "./RegisterForm.module.css";
 

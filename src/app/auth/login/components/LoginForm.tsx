@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useState } from "react";
 import Link from "next/link";
-import { UserModel } from "@/lib/models/User";
+import { UserModel } from "@/infraestructure/models/User";
 import { handleLogin } from "../logic/useLogin";
 import styles from "./Login.module.css";
 

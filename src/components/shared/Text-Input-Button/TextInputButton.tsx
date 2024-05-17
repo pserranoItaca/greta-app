@@ -1,7 +1,7 @@
-import { Container, TextField, colors } from "@mui/material";
 import { TextInputButtonProps } from "./TextInput.types";
 import styles from "./TextInputButton.module.scss";
-import { GretaButton, GretaText } from "@/components";
+import { Button, GretaText } from "@/components";
+import { TextInput } from "@mantine/core";
 
 export const TextInputButton = ({
   title = "",
@@ -16,13 +16,15 @@ export const TextInputButton = ({
     <div className={styles.general}>
       <GretaText color={textColor} variant={textVariant} content={title} />
       <div className={styles.general_text}>
-        <TextField
-          fullWidth
+        <TextInput
           label={placeholder}
           variant={variant}
           placeholder={placeholder}
         />
-        <GretaButton href={href}>{textButton}</GretaButton>
+        <Button>
+          <a href={href}></a>
+          {textButton}
+        </Button>
       </div>
     </div>
   );

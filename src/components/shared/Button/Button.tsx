@@ -1,12 +1,9 @@
-import { Button, ButtonProps, styled } from "@mui/material";
-import { GretaButtonProps } from "./Button.types";
-import { styles } from "./Button.module";
+import { Button as MantineButton } from "@mantine/core";
+import { ButtonProps } from "./Button.types";
 
-const GretaButton = ({ children, href, onClick }: GretaButtonProps) => {
+const Button = ({ ...props }: ButtonProps) => {
   return (
-    <Button onClick={onClick} href={href} sx={styles}>
-      {children}
-    </Button>
+    <MantineButton variant={props.variant}>{props.children}</MantineButton>
   );
 };
-export default GretaButton;
+export default Button;
