@@ -1,0 +1,51 @@
+@import "variables";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.register {
+  background-color: $secondaryColor;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  p {
+    margin-top: 10px;
+    text-align: center;
+  }
+  a {
+    text-decoration: underline;
+    background-color: $primaryColor;
+    font-style: italic;
+    color: $lightColor;
+    font-weight: bold;
+  }
+
+  form {
+    padding: 20px;
+    border-radius: 5px;
+    background-color: $lightColor;
+    width: fit-content;
+    padding-bottom: 20px;
+    margin-top: 6%;
+    h1 {
+      text-align: center;
+      color: $backGroundDark;
+    }
+    img {
+      margin: auto;
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.root {
+  width: 500px;
+}

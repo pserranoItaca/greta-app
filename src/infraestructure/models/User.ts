@@ -1,6 +1,7 @@
 export type UserModel = {
   id: string;
-  username: string;
-  pass: string;
-  secPass?: string;
+  email: string;
+  user: string;
+  passOne: string;
+  passTwo?: string;
 };
