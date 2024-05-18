@@ -1,29 +1,25 @@
+import { Button, Text, TextInput, Title } from "@mantine/core";
 import { TextInputButtonProps } from "./TextInput.types";
 import styles from "./TextInputButton.module.scss";
-import { Button, GretaText } from "@/components";
-import { TextInput } from "@mantine/core";
 
-export const TextInputButton = ({
-  title = "",
-  variant = "outlined",
-  textColor = "light",
-  textVariant = "title",
-  placeholder,
-  textButton,
-  href,
+const TextInputButton = ({
+  titleText,
+  buttonText,
+  link,
+  placeholder = "",
+  onChange,
 }: TextInputButtonProps) => {
   return (
-    <div className={styles.general}>
-      <GretaText color={textColor} variant={textVariant} content={title} />
-      <div className={styles.general_text}>
+    <div className={styles.container}>
+      <Title>{titleText}</Title>
+      <div className={styles.container_input}>
         <TextInput
-          label={placeholder}
-          variant={variant}
+          className={styles.container_input_text}
           placeholder={placeholder}
+          onChange={onChange}
         />
-        <Button>
-          <a href={href}></a>
-          {textButton}
+        <Button variant="filled" size="compact-lg" component="a" href={link}>
+          {buttonText}
         </Button>
       </div>
     </div>

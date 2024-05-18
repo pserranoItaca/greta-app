@@ -10,9 +10,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/* <head>
-        <ColorSchemeScript />
-      </head> */}
       <body>
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>

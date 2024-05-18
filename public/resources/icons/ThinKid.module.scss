@@ -1,0 +1,20 @@
+.thinkKid {
+  &_image {
+    left: 120px;
+    margin-top: 20px;
+    position: absolute;
+    transform: rotate(-30deg);
+    z-index: 1;
+  }
+  &_secondImage {
+    z-index: 1;
+    position: absolute;
+    transform: rotate(30deg);
+    margin-left: 270px;
+    margin-top: 320px;
+  }
+  &_svg {
+    position: relative;
+    z-index: 0;
+  }
+}

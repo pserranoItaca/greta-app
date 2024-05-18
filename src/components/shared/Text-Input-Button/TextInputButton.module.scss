@@ -1,29 +1,30 @@
-.general {
+@import "variables";
+
+.container {
+  background-color: $lightColor;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  justify-content: center;
   width: fit-content;
-  &_text {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    :first-child {
-      justify-content: center;
-      width: 50%;
-    }
+  padding: 35px;
+  h1 {
+    font-size: 35px;
+    color: $backGroundDark;
   }
-}
-@media screen and (max-width: 800px) {
-  .general {
+  &_input {
     display: flex;
-    flex-direction: column;
-    width: fit-content;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+    width: 100%;
+
     &_text {
-      display: flex;
-      flex-direction: column;
-      :first-child {
-        width: 100%;
-      }
+      width: 55%;
+    }
+    button {
+      width: 10%;
     }
   }
 }

@@ -1,0 +1,169 @@
+@import "variables";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+  gap: 10px;
+  padding: 20px;
+  background-color: $backGroundDark;
+  &_top {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $lightColor;
+    padding: 35px;
+  }
+  h1 {
+    font-size: 40px;
+  }
+}
+.bottom {
+  padding: 5px;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: $secondaryColor;
+  color: $lightColor;
+  gap: 4%;
+
+  &_text {
+    display: flex;
+    gap: 29px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  p {
+    font-size: 30px;
+  }
+}
+.allDevices {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+  padding: 8%;
+  width: 100%;
+
+  &_text {
+    width: 55%;
+    display: flex;
+    color: $backGroundDark;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    a {
+      margin-top: 15px;
+      width: fit-content;
+    }
+    h1 {
+      text-align: right;
+    }
+    p {
+      font-size: 25px;
+      margin-top: 10px;
+      text-align: end;
+    }
+  }
+}
+.genres {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 100px;
+  padding: 8%;
+  width: 100%;
+
+  &_text {
+    width: 55%;
+    display: flex;
+    color: $backGroundDark;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    a {
+      margin-top: 15px;
+      width: fit-content;
+    }
+    h1 {
+      text-align: start;
+    }
+    p {
+      font-size: 25px;
+      margin-top: 10px;
+      text-align: start;
+    }
+  }
+}
+.donate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+  padding: 8%;
+  width: 100%;
+
+  &_text {
+    width: 55%;
+    display: flex;
+    color: $backGroundDark;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+
+    h1 {
+      text-align: left;
+    }
+    p {
+      font-size: 25px;
+      margin-top: 10px;
+      text-align: end;
+    }
+  }
+}
+
+.faq {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+
+  h2 {
+    color: $backGroundDark;
+    font-size: 45px;
+  }
+  &_accSvg {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 7%;
+
+    &_crazy {
+      z-index: 0;
+      right: -100px;
+      position: relative;
+      bottom: 100px;
+      width: fit-content;
+      transform: scale(120%) rotate(-50deg);
+    }
+  }
+}
+.botomCTA {
+  display: flex;
+  justify-content: center;
+}

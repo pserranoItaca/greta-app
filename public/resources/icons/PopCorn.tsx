@@ -3,8 +3,8 @@ const PopCorn = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.0"
-      width="120"
-      height="120"
+      width="140"
+      height="140"
       viewBox="0 0 500.000000 500.000000"
       preserveAspectRatio="xMidYMid meet"
     >
