@@ -1,57 +1,77 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import {
+  Checkbox,
+  PasswordInput,
+  TextInput,
+  Title,
+  Text,
+  Button,
+} from "@mantine/core";
+import { IconAt, IconLock } from "@tabler/icons-react";
 import Link from "next/link";
+import * as useRegister from "./useLoginForm";
+import { logo } from "../../../../../public/brand";
+import Image from "next/image";
+import styles from "./LoginForm.module.scss";
+import { useState } from "react";
 import { UserModel } from "@/infraestructure/models/User";
-import { handleLogin } from "../logic/useLogin";
-import styles from "./Login.module.css";
 
 const LoginForm = () => {
-  const [user, setUser] = useState<UserModel>({
+  const { handleSubmit } = useRegister;
+  const [values, setValues] = useState<UserModel>({
     id: "",
-    username: "",
-    pass: "",
-    secPass: "",
+    email: "",
+    user: "",
+    passOne: "",
+    passTwo: "",
   });
-  const [err, setErr] = useState(false);
 
   return (
-    <div className={styles.section}>
-      <form className={styles.form} action="">
-        <h1 className={styles.title}>Bienvenido de nuevo!</h1>
+    <div className={styles.login}>
+      <div className={styles.login_form}>
+        <form action="" onSubmit={(e) => handleSubmit(e, values)}>
+          <Image
+            src={logo.default.src}
+            className={styles.header_logo}
+            alt={"GRETA!"}
+            width={200}
+            height={80}
+          />
+          <Title>Bienvenido de nuevo</Title>
+          <TextInput
+            name="email"
+            leftSectionPointerEvents="none"
+            leftSection={<IconAt />}
+            label="Correo electrónico"
+            placeholder="Correo electrónico"
+            classNames={{ root: styles.root }}
+            onChange={(e) => setValues({ ...values, email: e.target.value })}
+            required
+            // error={test(6)}
+          />
 
-        <input
-          className={styles.form_user}
-          type="email"
-          placeholder="Correo electronico"
-          onChange={(e) => {
-            setUser({ ...user, username: e.target.value });
-            setErr(false);
-          }}
-        />
-        <input
-          className={styles.form_pass}
-          type="password"
-          id="pass"
-          placeholder="Contraseña"
-          onChange={(e) => {
-            setUser({ ...user, pass: e.target.value });
-            setErr(false);
-          }}
-        />
-        <span>¿Has olvidado tu contraseña?</span>
+          <PasswordInput
+            label="Contraseña"
+            name="passOne"
+            placeholder="Contraseña"
+            leftSection={<IconLock />}
+            classNames={{ root: styles.root }}
+            onChange={(e) => setValues({ ...values, passOne: e.target.value })}
+            required
+          />
 
-        <input
-          className={styles.form_submit}
-          type="button"
-          value={"Entrar"}
-          onClick={(e) => handleLogin(e.nativeEvent, user.username, user.pass)}
-        />
-        {err && <p style={{ color: "red" }}>Error, datos inválidos</p>}
-      </form>
-      <span>
-        ¿No tienes cuenta? <Link href="../../auth/sign-up">Regístrate</Link>{" "}
-      </span>
+          <Button type="submit" variant="light">
+            Acceder!
+          </Button>
+        </form>
+        <Text>
+          ¿Asi que no tienes cuenta? -{" "}
+          <Link href={"../auth/sign-up"}> Registrarme </Link>
+        </Text>
+      </div>
+      <br />
+      <br />
     </div>
   );
 };

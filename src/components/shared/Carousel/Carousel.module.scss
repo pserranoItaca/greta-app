@@ -1,0 +1,32 @@
+.carousel {
+  margin-left: 15px;
+  &_title {
+    padding: 10px;
+    padding-bottom: 0;
+  }
+  &_slide {
+    background-color: white;
+    height: fit-content;
+  }
+}
+.root  {
+  margin-left: 15px;
+}
+
+.slide {
+  background-color: red;
+  cursor: pointer;
+  width: 5%;
+  margin-left: 30px;
+  border: solid black 1px;
+  display: flex;
+  align-items: end;
+  :first-child {
+    // width: 100%;
+    overflow: auto;
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+}

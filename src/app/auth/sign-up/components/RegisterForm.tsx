@@ -10,15 +10,14 @@ import {
 } from "@mantine/core";
 import { IconAt, IconLock } from "@tabler/icons-react";
 import Link from "next/link";
-import * as useRegister from "./useRegister";
 import { logo } from "../../../../../public/brand";
 import Image from "next/image";
 import styles from "./RegisterForm.module.scss";
 import { useState } from "react";
 import { UserModel } from "@/infraestructure/models/User";
+import { handleSubmit } from "./useRegisterForm";
 
 const RegisterForm = () => {
-  const { handleSubmit } = useRegister;
   const [values, setValues] = useState<UserModel>({
     id: "",
     email: "",
@@ -40,6 +39,8 @@ const RegisterForm = () => {
           />
           <Title>Aquí empieza tu aventura</Title>
           <TextInput
+            type="email"
+            value={localStorage.getItem("email") ?? undefined}
             name="email"
             leftSectionPointerEvents="none"
             leftSection={<IconAt />}
@@ -86,7 +87,8 @@ const RegisterForm = () => {
           </Button>
         </form>
         <Text>
-          ¿Asi que ya tienes cuenta? - <Link href={"/login"}> Acceder </Link>
+          ¿Asi que ya tienes cuenta? -{" "}
+          <Link href={"../auth/login"}> Acceder </Link>
         </Text>
       </div>
       <br />
