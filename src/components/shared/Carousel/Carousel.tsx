@@ -2,9 +2,12 @@
 
 import { Carousel as MantineCarousel } from "@mantine/carousel";
 import styles from "./Carousel.module.scss";
+import Image from "next/image";
 import { Title } from "@mantine/core";
+import { CarouselProps } from "./Carousel.types";
+import Link from "next/link";
 
-const Carousel = () => {
+const Carousel = ({ items }: CarouselProps) => {
   return (
     <div className={styles.carousel}>
       <Title className={styles.carousel_title}>peliculas!</Title>
@@ -19,12 +22,15 @@ const Carousel = () => {
         slidesToScroll={3}
         classNames={{ slide: styles.slide, root: styles.root }}
       >
-        <MantineCarousel.Slide>1</MantineCarousel.Slide>
-        <MantineCarousel.Slide>2</MantineCarousel.Slide>
-        <MantineCarousel.Slide>3</MantineCarousel.Slide>
-        <MantineCarousel.Slide>1</MantineCarousel.Slide>
-        <MantineCarousel.Slide>2</MantineCarousel.Slide>
-        <MantineCarousel.Slide>3</MantineCarousel.Slide>
+        {items.map((item) => (
+          <MantineCarousel.Slide>
+            <div>
+              <Link href={""}>
+                <Image src={""} alt={""} />
+              </Link>
+            </div>
+          </MantineCarousel.Slide>
+        ))}
       </MantineCarousel>
     </div>
   );
