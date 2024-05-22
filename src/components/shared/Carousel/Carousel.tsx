@@ -6,29 +6,30 @@ import Image from "next/image";
 import { Title } from "@mantine/core";
 import { CarouselProps } from "./Carousel.types";
 import Link from "next/link";
+import { Text } from "@mantine/core";
 
-const Carousel = ({ items }: CarouselProps) => {
+const Carousel = ({ items, title }: CarouselProps) => {
   return (
     <div className={styles.carousel}>
-      <Title className={styles.carousel_title}>peliculas!</Title>
+      <Text className={styles.carousel_title}>{title}</Text>
       <MantineCarousel
         withIndicators={false}
         withControls={false}
-        height={200}
-        slideSize="300px"
-        slideGap="lg"
+        height="140"
+        slideSize="260"
         loop
         align="start"
         slidesToScroll={3}
-        classNames={{ slide: styles.slide, root: styles.root }}
+        classNames={{
+          slide: styles.slide,
+          root: styles.root,
+          viewport: styles.viewport,
+        }}
       >
         {items.map((item) => (
           <MantineCarousel.Slide>
-            <div>
-              <Link href={""}>
-                <Image src={""} alt={""} />
-              </Link>
-            </div>
+            <p className={styles.carousel_filmTitle}>Film title</p>
+            <img src={item.poster.src} alt={item.poster.alt} />
           </MantineCarousel.Slide>
         ))}
       </MantineCarousel>

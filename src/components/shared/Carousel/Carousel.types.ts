@@ -1,10 +1,11 @@
 import { ResourceModel } from "@/utils/Models";
 
 export type SlideType = {
-  posters: ResourceModel;
+  poster: ResourceModel;
   href: string;
 };
 
 export interface CarouselProps {
+  title?: string;
   items: SlideType[];
 }
