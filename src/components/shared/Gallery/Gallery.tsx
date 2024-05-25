@@ -1,24 +1,36 @@
-"use client";
-
 import { ResourceModel } from "@/utils/Models";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import styles from "./Gallery.module.scss";
 
 interface GalleryProps {
-  images: ResourceModel[];
+  posters: ResourceModel[];
 }
 
-const Gallery = ({ images }: GalleryProps) => {
-  const [source, setSource] = useState("");
+const Gallery = ({ posters }: GalleryProps) => {
+  const [index, setIndex] = useState(0);
 
-  images.map((image) =>
-    setTimeout(() => {
-      setSource(image.src);
-    }, 2000)
-  );
+  const handleInterval = () => {
+    if (index < posters.length - 1) {
+      setIndex(index + 1);
+    }
+    if (index == posters.length - 1) setIndex(0);
+  };
+
+  // useEffect(() => {
+  //   const interval = setInterval(handleInterval, 3500);
+  //   return () => clearInterval(interval);
+  // }, [, index]);
 
   return (
-    <div>
-      <img src={source} alt="gallery-item" />
+    <div className={styles.gallery}>
+      <Link href={""}>
+        <img
+          className={styles.gallery_image}
+          src={posters[index].src}
+          alt={posters[index].alt}
+        />
+      </Link>
     </div>
   );
 };

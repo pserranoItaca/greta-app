@@ -1,20 +1,26 @@
-import { Carousel, FeaturedMovie, Footer } from "@/components";
-import FilmsHeader from "./components/FilmsHeader/FilmsHeader";
+"use client";
+
+import FilmsHeader from "../../components/FilmsHeader/FilmsHeader";
 import Gallery from "@/components/shared/Gallery/Gallery";
-import { CarouselDD } from "@/testing/DumbData";
+import { CarouselDD, GalleryDD } from "@/testing/DumbData";
 import styles from "./Films.module.scss";
+import Carousel from "@/components/shared/Carousel/Carousel";
+import FeaturedMovie from "@/components/shared/FeaturedMovie/FeaturedMovie";
+import { Footer } from "@/components/Footer";
 
 const Films = () => {
   return (
     <>
-      <FilmsHeader />
+      {/* <section className={styles.topGallery}>
+        <Gallery posters={GalleryDD} />
+      </section> */}
+
       <section className={styles.topCarousels}>
         <Carousel title="Las mejores peliculas de miedo" items={CarouselDD} />
         <Carousel title="Tu videoclub" items={CarouselDD} />
         <Carousel title="Las mejores peliculas de miedo" items={CarouselDD} />
       </section>
 
-      {/* <Gallery images={testImages} /> */}
       <section className={styles.featuredFilms}>
         <FeaturedMovie
           title={"Criando ratas"}

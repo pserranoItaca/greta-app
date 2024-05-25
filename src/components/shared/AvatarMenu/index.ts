@@ -1,1 +1,2 @@
-export { default as AvatarMenu } from "./AvatarMenu";
+export * from "./AvatarMenu";
+export * from "./AvatarMenu.types";

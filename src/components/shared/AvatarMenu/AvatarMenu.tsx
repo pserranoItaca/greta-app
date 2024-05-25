@@ -5,8 +5,14 @@ import { Avatar, Menu, rem } from "@mantine/core";
 import styles from "./AvatarMenu.module.scss";
 import { AvatarMenuProps } from "./AvatarMenu.types";
 import Link from "next/link";
+import {
+  IconUser,
+  IconSettings,
+  IconDoorExit,
+  IconUpload,
+} from "@tabler/icons-react";
 
-const AvatarMenu = ({ options, ...props }: AvatarMenuProps) => {
+const AvatarMenu = ({ ...props }: AvatarMenuProps) => {
   return (
     <Menu {...props}>
       <Menu.Target>
@@ -14,15 +20,52 @@ const AvatarMenu = ({ options, ...props }: AvatarMenuProps) => {
       </Menu.Target>
 
       <Menu.Dropdown>
-        {options?.map((option) => (
-          <Menu.Item leftSection={option.icon && option.icon}>
-            {option.link ? (
-              <Link href={option.link}>{option.label}</Link>
-            ) : (
-              <span>{option.label}</span>
-            )}
-          </Menu.Item>
-        ))}
+        <Menu.Label>{"GRETA <3"}</Menu.Label>
+        <Menu.Item
+          leftSection={<IconUser style={{ width: rem(14), height: rem(14) }} />}
+        >
+          <Link
+            className={styles.link}
+            href={"http://localhost:3000/user/dashboard"}
+          >
+            Usuario
+          </Link>
+        </Menu.Item>
+        <Menu.Item
+          leftSection={
+            <IconSettings style={{ width: rem(14), height: rem(14) }} />
+          }
+        >
+          <Link
+            className={styles.link}
+            href={"http://localhost:3000/user/dashboard"}
+          >
+            Ajustes
+          </Link>
+        </Menu.Item>
+        <Menu.Item
+          leftSection={
+            <IconUpload style={{ width: rem(14), height: rem(14) }} />
+          }
+        >
+          <Link
+            className={styles.link}
+            href={"http://localhost:3000/user/dashboard"}
+          >
+            Subir contenido
+          </Link>
+        </Menu.Item>
+
+        <Menu.Divider />
+
+        <Menu.Item
+          color="red"
+          leftSection={
+            <IconDoorExit style={{ width: rem(14), height: rem(14) }} />
+          }
+        >
+          {"Salir de Greta :("}
+        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );

@@ -1,0 +1,17 @@
+@import "variables";
+
+.updateForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h3 {
+    color: $backGroundDark;
+    padding: 10px;
+    font-size: 30px;
+  }
+  button {
+    margin-top: 10px;
+    padding: 10px;
+  }
+}

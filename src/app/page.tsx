@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import styles from "./Home.module.scss";
-import { Footer, TextInputButton } from "@/components";
 import { Button, Text, Title } from "@mantine/core";
 import { logo } from "../../public/brand";
 import { Suspense } from "react";
@@ -15,6 +14,9 @@ import {
   bobComputer,
 } from "../../public/resources";
 import Accordion from "@/components/shared/Accordion/Accordion";
+import { AccordionItemType } from "@/components";
+import { TextInputButton } from "@/components/shared/Text-Input-Button";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   const groceries: AccordionItemType[] = [
@@ -163,8 +165,6 @@ export default function Home() {
           onChange={(e) => localStorage.setItem("email", e.target.value)}
         />
       </div>
-
-      <Footer />
     </>
   );
 }

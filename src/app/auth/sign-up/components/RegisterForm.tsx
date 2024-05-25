@@ -15,7 +15,7 @@ import Image from "next/image";
 import styles from "./RegisterForm.module.scss";
 import { useState } from "react";
 import { UserModel } from "@/infraestructure/models/User";
-import { handleSubmit } from "./useRegisterForm";
+import { handleSubmit } from "../../login/components/useLoginForm";
 
 const RegisterForm = () => {
   const [values, setValues] = useState<UserModel>({

@@ -5,6 +5,8 @@ import "@mantine/notifications/styles.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import theme from "../../styles/Theme";
 import { Notifications } from "@mantine/notifications";
+import { Footer } from "@/components/Footer";
+import FilmsHeader from "@/components/FilmsHeader/FilmsHeader";
 
 export default function RootLayout({
   children,
@@ -15,8 +17,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <MantineProvider theme={theme}>
-          <Notifications />
+          <FilmsHeader />
           {children}
+          <Notifications />
+          <Footer />
         </MantineProvider>
       </body>
     </html>
