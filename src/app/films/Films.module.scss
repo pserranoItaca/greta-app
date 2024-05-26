@@ -1,10 +1,27 @@
 .topCarousels {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 2%;
   padding: 10px;
 }
-
-.featuredFilms {
-  padding: 5%;
+.cards {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5%;
+}
+.wakala {
+  text-align: center;
+  font-style: italic;
+  font-size: 32px;
+  margin-left: 10px;
+  color: #4e5152;
+  text-decoration: underline;
+  margin-bottom: 5px;
+}
+@media only screen and (max-width: 1100px) {
+  .wakala {
+    display: none;
+  }
 }

@@ -12,20 +12,20 @@ import {
   Title,
 } from "@mantine/core";
 import { useState } from "react";
-import { IconAt, IconLock } from "@tabler/icons-react";
 import { UserModel } from "@/infraestructure/models/User";
-import { handleUpdateSubmit } from "./actions/useUpdateUser";
-import { Footer } from "@/components/Footer";
 import FilmsTable from "@/components/shared/FilmsTable/FilmsTable";
-import { FilmModel } from "@/infraestructure/models/Film";
+
 import { FilmsTestValues } from "@/testing/DumbData";
-import UpdateForm from "./components/UpdateUserForm/UpdateUserForm";
-import UpdateFilmForm from "./components/UpdateFilmForm/UpdateFilmForm";
+import UpdateUserForm from "./components/UpdateUserForm/UpdateUserForm";
+import UpdateFilmForm from "./components/UploadFilmForm/UploadFilmForm";
+import UploadFilmForm from "./components/UploadFilmForm/UploadFilmForm";
 
 const DashboardPage = () => {
-  const [openedDrawer, setOpenedDrawer] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-
+  const [opened, setOpened] = useState({
+    updateUser: false,
+    updateFilm: false,
+    uploadNewFilm: false,
+  });
   //estos datos me vendrán de servidor
   const [newUserValues, setNewUsersValues] = useState<UserModel>({
     id: "",
@@ -39,27 +39,41 @@ const DashboardPage = () => {
     <>
       <div className={styles.dashboard}>
         <div className={styles.dashboard_user}>
-          <UserCardImage infoUser={[]} onClick={() => setOpenModal(true)} />
+          <UserCardImage
+            infoUser={[]}
+            onClick={() => setOpened({ ...opened, updateUser: true })}
+          />
         </div>
 
         <div className={styles.dashboard_table}>
-          <Button onClick={() => setOpenedDrawer(true)}>Subir pelicula</Button>
+          <Button onClick={() => setOpened({ ...opened, uploadNewFilm: true })}>
+            Subir pelicula
+          </Button>
           <FilmsTable
             userFilms={FilmsTestValues}
-            onClickTable={() => alert("editar")}
+            onClickTable={() => setOpened({ ...opened, updateFilm: true })}
           />
           <Drawer
-            opened={openedDrawer}
-            onClose={() => setOpenedDrawer(false)}
+            opened={opened.uploadNewFilm}
+            onClose={() => setOpened({ ...opened, uploadNewFilm: false })}
             position="bottom"
-            size={"100%"}
+            size={"90%"}
           >
-            <UpdateFilmForm />
+            <UploadFilmForm />
           </Drawer>
         </div>
 
-        <Modal opened={openModal} onClose={() => setOpenModal(false)}>
-          <UpdateForm />
+        <Modal
+          opened={opened.updateUser}
+          onClose={() => setOpened({ ...opened, updateUser: false })}
+        >
+          <UpdateUserForm />
+        </Modal>
+        <Modal
+          opened={opened.updateFilm}
+          onClose={() => setOpened({ ...opened, updateFilm: false })}
+        >
+          <UpdateFilmForm />
         </Modal>
       </div>
     </>

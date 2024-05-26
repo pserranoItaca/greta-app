@@ -1,0 +1,34 @@
+@import "variables";
+
+.film {
+  background-color: $backGroundDark;
+  display: "flex";
+  flex-direction: "column";
+  background-color: "white";
+  width: "80%";
+  padding: "20px";
+  border-radius: "5px";
+  margin: "auto";
+
+  &_media {
+    &_chunk {
+    }
+  }
+  &_text {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    gap: 15px;
+    border-radius: 10px;
+    margin: 2% 2% 2% 2%;
+    background-color: $lightColor;
+  }
+}
+
+.panel {
+  gap: 5px;
+  padding: 2%;
+}
+.tab {
+  font-size: 17px;
+}

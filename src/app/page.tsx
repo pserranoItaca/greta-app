@@ -1,22 +1,17 @@
 "use client";
 
-import Image from "next/image";
 import styles from "./Home.module.scss";
 import { Button, Text, Title } from "@mantine/core";
-import { logo } from "../../public/brand";
-import { Suspense } from "react";
 import {
   CrazyGirl,
   GroupChat,
   PopCorn,
   SurpriseGirl,
   ThinkKid,
-  bobComputer,
 } from "../../public/resources";
 import Accordion from "@/components/shared/Accordion/Accordion";
 import { AccordionItemType } from "@/components";
 import { TextInputButton } from "@/components/shared/Text-Input-Button";
-import { Footer } from "@/components/Footer";
 
 export default function Home() {
   const groceries: AccordionItemType[] = [
@@ -46,26 +41,7 @@ export default function Home() {
   ];
 
   return (
-    <>
-      <section className={styles.header}>
-        <Suspense>
-          <Image
-            src={logo.default.src}
-            className={styles.header_logo}
-            alt={"GRETA!"}
-            width={200}
-            height={80}
-          />
-
-          <Button
-            variant="filled"
-            size="compact-xl"
-            className={styles.header_button}
-          >
-            Iniciar sesion
-          </Button>
-        </Suspense>
-      </section>
+    <div className={styles.films}>
       <section className={styles.title}>
         <div className={styles.title_top}>
           <Title order={1}>
@@ -96,6 +72,7 @@ export default function Home() {
         <div className={styles.allDevices_icon}>
           <ThinkKid />
         </div>
+
         <div className={styles.allDevices_text}>
           <Title size={60}>
             Puedes ver cortos de un artista de un pueblo de Toledo donde te
@@ -105,7 +82,7 @@ export default function Home() {
             GRETA es una plataforma de straming que ofrece la oportunidad a
             artistas independientes de contar sus historias
           </Text>
-          <Button size="lg" component="a" href="auth/login">
+          <Button size="lg" component="a" href="auth/sign-up">
             🪬 Adéntrate en lo desconocido 🪬
           </Button>
         </div>
@@ -121,7 +98,7 @@ export default function Home() {
             GRETA es una plataforma de straming que ofrece la oportunidad a
             artistas independientes de contar sus historias
           </Text>
-          <Button size="lg" component="a" href="auth/login">
+          <Button size="lg" component="a" href="auth/sign-up">
             🫂 Enamórate del cine independiente 🫂
           </Button>
         </div>
@@ -145,17 +122,23 @@ export default function Home() {
           </Text>
         </div>
       </section>
+
       <section className={styles.faq}>
-        <Title order={2}>Preguntas precuentes</Title>
-        <Title order={2}>AKA</Title>
-        <Title order={2}>FAAAAAAQ</Title>
-        <div className={styles.faq_accSvg}>
-          <Accordion items={groceries} variant={"separated"} />
-          <div className={styles.faq_accSvg_crazy}>
+        <Title order={2}>Preguntas frecuentes</Title>
+        <Title order={2}>aka</Title>
+        <Title order={2}>FAQ</Title>
+
+        <div className={styles.faq_content}>
+          <div className={styles.faq_content_svg}>
+            {" "}
             <CrazyGirl />
+          </div>
+          <div className={styles.faq_content_accordion}>
+            <Accordion items={groceries} variant={"separated"} />
           </div>
         </div>
       </section>
+
       <div className={styles.botomCTA}>
         <TextInputButton
           titleText={"Empieza a disfrutar GRATIS de historias independientes"}
@@ -165,6 +148,6 @@ export default function Home() {
           onChange={(e) => localStorage.setItem("email", e.target.value)}
         />
       </div>
-    </>
+    </div>
   );
 }

@@ -1,59 +1,72 @@
-import { Tabs, TextInput, Title } from "@mantine/core";
+import { Tabs } from "@mantine/core";
 import styles from "./UpdateFilmForm.module.scss";
-import {
-  IconEyeQuestion,
-  IconArchive,
-  IconBrandTeams,
-} from "@tabler/icons-react";
-import PillsInput from "@/components/shared/PillsInput/PillsInput";
 
 const UpdateFilmForm = () => {
   return (
-    <div className={styles.form}>
-      <form className={styles.form} action="">
-        <Title className={styles.title}>Estamos deseando ver tu creación</Title>
-        <Title className={styles.subtitle}>
-          pero antes debemos saber una serie de cosas...
-        </Title>
-        <Tabs defaultValue={"general"}>
-          {" "}
-          <Tabs.List>
-            <Tabs.Tab value="general" leftSection={<IconEyeQuestion />}>
-              Hablanos de tu obra...
-            </Tabs.Tab>
-            <Tabs.Tab value="uploads" leftSection={<IconArchive />}>
-              Compártenos el contenido
-            </Tabs.Tab>
-            <Tabs.Tab value="people" leftSection={<IconBrandTeams />}>
-              ¿Quien ha participado?
-            </Tabs.Tab>
-          </Tabs.List>
-          <Tabs.Panel value="general" className={styles.panel_general}>
-            <TextInput
-              leftSectionPointerEvents="none"
-              label="Titulo de tu obra"
-              placeholder="Titulo de tu obra"
-              classNames={{ root: styles.root }}
-              name="title"
-              required
-            />
-            <PillsInput></PillsInput>
+    <form className={styles.form}>
+      <Tabs
+        defaultValue={"general"}
+        classNames={{ root: styles.root, panel: styles.panel }}
+      >
+        <Tabs.List>
+          <Tabs.Tab value="general" leftSection={<IconEyeQuestion />}>
+            Hablanos de tu obra...
+          </Tabs.Tab>
+          <Tabs.Tab value="people" leftSection={<IconBrandTeams />}>
+            ¿Quien ha participado?
+          </Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panel value="general">
+          <TextInput
+            leftSectionPointerEvents="none"
+            label="Titulo de tu obra"
+            placeholder="Titulo de tu obra"
+            onChange={(e) => setInfo({ ...info, title: e.target.value })}
+            name="title"
+            required
+          />
 
-            <TextInput
-              type="text"
-              leftSectionPointerEvents="none"
-              label="¿De que trata tu obra?"
-              placeholder="Descripción de tu creación"
-              classNames={{ root: styles.root }}
-              name="user"
-              required
-            />
-          </Tabs.Panel>
-          {/* <Tabs.Panel value="uploads">Gallery tab content</Tabs.Panel>
-      <Tabs.Panel value="people">Gallery tab content</Tabs.Panel> */}
-        </Tabs>
-      </form>
-    </div>
+          <Textarea
+            leftSectionPointerEvents="none"
+            label="¿De que trata tu obra?"
+            placeholder="Descripción de tu creación"
+            name="user"
+            onChange={(e) => setInfo({ ...info, title: e.target.value })}
+            autosize
+            required
+          />
+          <MultiSelect
+            label="Selecciona los géneros de tu obra"
+            placeholder="Selecciona los géneros de tu obra"
+            data={FilmGenres}
+          ></MultiSelect>
+        </Tabs.Panel>
+        <Tabs.Panel value="uploads">Gallery tab content</Tabs.Panel>
+        <Tabs.Panel value="people">
+          <TextInput
+            leftSectionPointerEvents="none"
+            label="Director"
+            placeholder="Director"
+            name="director"
+          />{" "}
+          <TextInput
+            leftSectionPointerEvents="none"
+            label="Director de arte"
+            placeholder="Director de arte"
+            name="art"
+          />{" "}
+          <TextInput
+            leftSectionPointerEvents="none"
+            label="Director de sonido"
+            placeholder="Director de sonido"
+            name="sound"
+          />
+        </Tabs.Panel>
+      </Tabs>
+      <Button variant="filled" size="lg" type="submit">
+        Subir película
+      </Button>
+    </form>
   );
 };
 export default UpdateFilmForm;

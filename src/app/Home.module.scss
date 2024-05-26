@@ -4,7 +4,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
 }
 
 .title {
@@ -13,7 +12,7 @@
   align-items: center;
   font-family: sans-serif;
   gap: 10px;
-  padding: 20px;
+
   background-color: $backGroundDark;
   &_top {
     margin-top: 1%;
@@ -23,7 +22,6 @@
     justify-content: center;
     align-items: center;
     color: $lightColor;
-    padding: 35px;
   }
   h1 {
     font-size: 40px;
@@ -52,14 +50,14 @@
 }
 .allDevices {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   gap: 50px;
   padding: 8%;
   width: 100%;
 
   &_text {
-    width: 55%;
+    width: 100%; /* Cambiado para ocupar todo el ancho en pantallas pequeñas */
     display: flex;
     color: $backGroundDark;
     flex-direction: column;
@@ -70,100 +68,142 @@
       width: fit-content;
     }
     h1 {
-      text-align: right;
+      text-align: center; /* Cambiado para centrar en pantallas pequeñas */
     }
     p {
       font-size: 25px;
       margin-top: 10px;
-      text-align: end;
+      text-align: center; /* Cambiado para centrar en pantallas pequeñas */
     }
   }
 }
+
+@media (min-width: 900px) {
+  .allDevices {
+    flex-direction: row;
+    justify-content: center; /* Centra horizontalmente los elementos */
+    &_text {
+      width: 55%; /* Vuelve al ancho original para pantallas más grandes */
+      h1 {
+        text-align: right; /* Texto alineado a la derecha en pantallas más grandes */
+      }
+      p {
+        text-align: end; /* Texto alineado a la derecha en pantallas más grandes */
+      }
+    }
+  }
+}
+
 .genres {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 100px;
   padding: 8%;
-  width: 100%;
+  text-align: center;
+}
 
-  &_text {
-    width: 55%;
-    display: flex;
-    color: $backGroundDark;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    a {
-      margin-top: 15px;
-      width: fit-content;
-    }
-    h1 {
-      text-align: start;
-    }
-    p {
-      font-size: 25px;
-      margin-top: 10px;
-      text-align: start;
-    }
+.genres_text {
+  width: 100%;
+  max-width: 800px; /* Limita el ancho máximo del texto para que no se vea demasiado ancho en pantallas grandes */
+  color: $backGroundDark;
+}
+
+.genres_text h1 {
+  font-size: 3rem; /* Tamaño de fuente más grande para pantallas grandes */
+}
+
+.genres_text p {
+  font-size: 1.5rem; /* Tamaño de fuente más grande para pantallas grandes */
+}
+
+.genres_text a {
+  margin-top: 15px;
+  display: inline-block; /* Alinea el botón en línea con el texto */
+}
+
+@media screen and (min-width: 1500px) {
+  .genres {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .genres_text {
+    width: 50%; /* Reducir el ancho del texto en pantallas más grandes */
+    text-align: left; /* Alinear el texto a la izquierda en pantallas más grandes */
+  }
+  .genres_icon {
+    width: 50%; /* Reducir el ancho del texto en pantallas más grandes */
   }
 }
 .donate {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 50px;
   padding: 8%;
-  width: 100%;
+  text-align: center;
 
   &_text {
-    width: 55%;
-    display: flex;
+    width: 100%;
+    max-width: 800px; // Limita el ancho máximo del texto para pantallas grandes
     color: $backGroundDark;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding-bottom: 10px;
 
     h1 {
-      text-align: left;
+      font-size: 3rem; // Tamaño de fuente más grande para pantallas grandes
+      text-align: left; // Alinear el título a la izquierda en pantallas grandes
     }
+
     p {
-      font-size: 25px;
+      font-size: 1.5rem; // Tamaño de fuente más grande para pantallas grandes
       margin-top: 10px;
-      text-align: end;
+      text-align: left; // Alinear el texto a la izquierda en pantallas grandes
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+
+    &_text {
+      width: 50%; // Reducir el ancho del texto en pantallas más grandes
+      text-align: left; // Alinear el texto a la izquierda en pantallas más grandes
     }
   }
 }
 
-.faq {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-
-  h2 {
-    color: $backGroundDark;
-    font-size: 45px;
-  }
-  &_accSvg {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 7%;
-
-    &_crazy {
-      z-index: 0;
-      right: -100px;
-      position: relative;
-      bottom: 100px;
-      width: fit-content;
-      transform: scale(120%) rotate(-50deg);
-    }
-  }
-}
 .botomCTA {
   display: flex;
   justify-content: center;
+}
+
+.faq {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    color: $backGroundDark;
+    font-size: 3rem; // Tamaño de fuente más grande para pantallas grandes
+    text-align: center; //
+  }
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &_accordion {
+      width: 100%;
+    }
+  }
+}
+@media only screen and (max-width: 900px) {
+  .faq_content_accordion {
+    width: 100%;
+  }
+  .faq_content_svg {
+    overflow: hidden;
+    transform: (scale(-10deg));
+    display: none;
+  }
 }

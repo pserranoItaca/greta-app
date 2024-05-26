@@ -1,27 +1,34 @@
 "use client";
 
-import FilmsHeader from "../../components/FilmsHeader/FilmsHeader";
-import Gallery from "@/components/shared/Gallery/Gallery";
-import { CarouselDD, GalleryDD } from "@/testing/DumbData";
-import styles from "./Films.module.scss";
+import Card from "@/components/shared/Card/Card";
 import Carousel from "@/components/shared/Carousel/Carousel";
 import FeaturedMovie from "@/components/shared/FeaturedMovie/FeaturedMovie";
-import { Footer } from "@/components/Footer";
+import { CarouselDD, HotelBudapestDD } from "@/testing/DumbData";
+import styles from "./Films.module.scss";
+import { Title } from "@mantine/core";
 
 const Films = () => {
   return (
     <>
-      {/* <section className={styles.topGallery}>
-        <Gallery posters={GalleryDD} />
-      </section> */}
+      <Carousel title="Tu videoclub" items={CarouselDD} />
 
+      <div style={{ padding: "2%" }}>
+        <FeaturedMovie
+          title={"Criando ratas"}
+          award={"most stramed this month"}
+          description={""}
+          poster={{
+            src: "https://www.w3schools.com/html/img_chania.jpg",
+            alt: "alt",
+          }}
+        />
+      </div>
       <section className={styles.topCarousels}>
         <Carousel title="Las mejores peliculas de miedo" items={CarouselDD} />
         <Carousel title="Tu videoclub" items={CarouselDD} />
         <Carousel title="Las mejores peliculas de miedo" items={CarouselDD} />
       </section>
-
-      <section className={styles.featuredFilms}>
+      <div style={{ padding: "2%" }}>
         <FeaturedMovie
           title={"Criando ratas"}
           award={"most stramed this month"}
@@ -34,27 +41,63 @@ const Films = () => {
         <FeaturedMovie
           title={"Criando ratas"}
           award={"most stramed this month"}
-          description={
-            "A  film about friendship and drugs like Trainspoitting but in spanish"
-          }
+          description={""}
           poster={{
             src: "https://www.w3schools.com/html/img_chania.jpg",
             alt: "alt",
           }}
         />
-        <FeaturedMovie
-          title={"Criando ratas"}
-          award={"most stramed this month"}
-          description={
-            "A  film about friendship and drugs like Trainspoitting but in spanish"
-          }
-          poster={{
-            src: "https://www.w3schools.com/html/img_chania.jpg",
-            alt: "alt",
-          }}
-        />
+      </div>
+      <Carousel title="Las mejores peliculas de miedo" items={CarouselDD} />
+
+      <section>
+        <Carousel title="Tu videoclub" items={CarouselDD} />
+        <Carousel title="Las mejores peliculas de miedo" items={CarouselDD} />
       </section>
-      <Footer />
+      <section className={styles.cards}>
+        <div className={styles.container} style={{}}>
+          <Title className={styles.wakala}>Nuestra selección de hoy</Title>
+          <Title className={styles.wakala}>Nuestra selección de hoy</Title>
+          <Title className={styles.wakala}>Nuestra selección de hoy</Title>
+        </div>
+
+        <div style={{ width: "33%" }}>
+          <Card
+            title={HotelBudapestDD.title}
+            text={HotelBudapestDD.description}
+            genres={HotelBudapestDD.genres}
+            href={HotelBudapestDD.poster.src}
+            image={{
+              src: "https://www.w3schools.com/html/pic_trulli.jpg",
+              alt: "alt",
+            }}
+          />
+        </div>
+        <div style={{ width: "33%" }}>
+          <Card
+            title={HotelBudapestDD.title}
+            text={HotelBudapestDD.description}
+            genres={HotelBudapestDD.genres}
+            href={HotelBudapestDD.poster.src}
+            image={{
+              src: "https://www.w3schools.com/html/pic_trulli.jpg",
+              alt: "alt",
+            }}
+          />
+        </div>
+        <div style={{ width: "33.33%" }}>
+          <Card
+            title={HotelBudapestDD.title}
+            text={HotelBudapestDD.description}
+            genres={HotelBudapestDD.genres}
+            href={HotelBudapestDD.poster.src}
+            image={{
+              src: "https://www.w3schools.com/html/pic_trulli.jpg",
+              alt: "alt",
+            }}
+          />
+        </div>
+      </section>
     </>
   );
 };

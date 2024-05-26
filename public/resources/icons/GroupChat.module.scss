@@ -1,6 +1,6 @@
 .groupChat {
   &_image {
-    right: 35%;
+    right: 65%;
     margin-top: 10px;
     position: absolute;
     transform: rotate(-30deg);
@@ -10,11 +10,37 @@
     z-index: 1;
     position: absolute;
     transform: rotate(30deg);
-    margin-left: 270px;
-    margin-top: 400px;
+    margin-left: 20%;
+    margin-top: 30%;
   }
   &_svg {
     position: relative;
     z-index: 0;
+  }
+  @media (max-width: 1200px) {
+    .groupChat {
+      &_image {
+        visibility: hidden;
+      }
+      &_secondImage {
+        visibility: hidden;
+      }
+    }
+  }
+}
+.crazyGirl {
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+
+    &_content {
+      flex-direction: column;
+    }
+
+    &_svg {
+      :first-child {
+        display: none;
+        visibility: hidden;
+      }
+    }
   }
 }

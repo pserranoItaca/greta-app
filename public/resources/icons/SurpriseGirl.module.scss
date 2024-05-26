@@ -18,3 +18,13 @@
     z-index: 0;
   }
 }
+@media (max-width: 900px) {
+  .surpriseGirl {
+    &_image {
+      visibility: hidden;
+    }
+    &_secondImage {
+      visibility: hidden;
+    }
+  }
+}
