@@ -17,8 +17,8 @@ import FilmsTable from "@/components/shared/FilmsTable/FilmsTable";
 
 import { FilmsTestValues } from "@/testing/DumbData";
 import UpdateUserForm from "./components/UpdateUserForm/UpdateUserForm";
-import UpdateFilmForm from "./components/UploadFilmForm/UploadFilmForm";
 import UploadFilmForm from "./components/UploadFilmForm/UploadFilmForm";
+import UpdateFilmForm from "./components/UpdateFilmForm/UpdateFilmForm";
 
 const DashboardPage = () => {
   const [opened, setOpened] = useState({
@@ -70,6 +70,7 @@ const DashboardPage = () => {
           <UpdateUserForm />
         </Modal>
         <Modal
+          size={"xl"}
           opened={opened.updateFilm}
           onClose={() => setOpened({ ...opened, updateFilm: false })}
         >

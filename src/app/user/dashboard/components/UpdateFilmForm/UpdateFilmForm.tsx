@@ -1,19 +1,42 @@
-import { Tabs } from "@mantine/core";
+import {
+  Button,
+  MultiSelect,
+  Tabs,
+  TextInput,
+  Textarea,
+  Title,
+} from "@mantine/core";
+
+import {
+  IconBrandTeams,
+  IconEyeQuestion,
+  IconMapCancel,
+} from "@tabler/icons-react";
 import styles from "./UpdateFilmForm.module.scss";
+import { FilmGenres } from "@/testing/DumbData";
+import { useState } from "react";
+import { FilmModel } from "@/infraestructure/models/Film";
 
 const UpdateFilmForm = () => {
+  //! consulta a servidor para pillar estos datos!!!
+  const [currentValues, setCurrentsValues] = useState<FilmModel>();
   return (
     <form className={styles.form}>
+      <Title className={styles.title}>¿Qué te apetece modificar?</Title>
+
       <Tabs
         defaultValue={"general"}
         classNames={{ root: styles.root, panel: styles.panel }}
       >
         <Tabs.List>
           <Tabs.Tab value="general" leftSection={<IconEyeQuestion />}>
-            Hablanos de tu obra...
+            Hablanos de tu obra... d
           </Tabs.Tab>
           <Tabs.Tab value="people" leftSection={<IconBrandTeams />}>
             ¿Quien ha participado?
+          </Tabs.Tab>
+          <Tabs.Tab color="red" value="delete" leftSection={<IconBrandTeams />}>
+            Borrar película
           </Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel value="general">
@@ -21,7 +44,7 @@ const UpdateFilmForm = () => {
             leftSectionPointerEvents="none"
             label="Titulo de tu obra"
             placeholder="Titulo de tu obra"
-            onChange={(e) => setInfo({ ...info, title: e.target.value })}
+            // onChange={(e) => setInfo({ ...info, title: e.target.value })}
             name="title"
             required
           />
@@ -31,17 +54,21 @@ const UpdateFilmForm = () => {
             label="¿De que trata tu obra?"
             placeholder="Descripción de tu creación"
             name="user"
-            onChange={(e) => setInfo({ ...info, title: e.target.value })}
+            // onChange={(e) => setInfo({ ...info, title: e.target.value })}
             autosize
             required
           />
           <MultiSelect
             label="Selecciona los géneros de tu obra"
+            defaultValue={[]}
             placeholder="Selecciona los géneros de tu obra"
             data={FilmGenres}
           ></MultiSelect>
         </Tabs.Panel>
-        <Tabs.Panel value="uploads">Gallery tab content</Tabs.Panel>
+
+        <Tabs.Panel value="delete">
+          <Button>Borrar película</Button>
+        </Tabs.Panel>
         <Tabs.Panel value="people">
           <TextInput
             leftSectionPointerEvents="none"
@@ -63,8 +90,8 @@ const UpdateFilmForm = () => {
           />
         </Tabs.Panel>
       </Tabs>
-      <Button variant="filled" size="lg" type="submit">
-        Subir película
+      <Button variant="light" size="lg" type="submit">
+        Actualizar película
       </Button>
     </form>
   );
