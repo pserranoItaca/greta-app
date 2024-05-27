@@ -1,5 +1,7 @@
 export * from "./Accordion/Accordion";
 export * from "./Accordion/Accordion.types";
+export * from "./AuthGuard/AuthGuard";
+export * from "./AuthGuard/AuthGuard.types";
 export * from "./AvatarMenu/AvatarMenu";
 export * from "./AvatarMenu/AvatarMenu.types";
 export * from "./Button/Button";
@@ -12,6 +14,7 @@ export * from "./FeaturedMovie/FeaturedMovie.types";
 export * from "./FilmsTable/FilmsTable";
 export * from "./Gallery/Gallery";
 export * from "./Movie/Movie";
+export * from "./Movie/ReactPlayer/ReactPlayer";
 export * from "./Table/Row";
 export * from "./Text-Input-Button/TextInput.types";
 export * from "./Text-Input-Button/TextInputButton";

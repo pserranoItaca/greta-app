@@ -1,3 +1,4 @@
+import AuthGuard from "@/components/shared/AuthGuard/AuthGuard";
 import { FilmModel } from "@/infraestructure/models/Film";
 
 const VideoClub = () => {
@@ -5,10 +6,14 @@ const VideoClub = () => {
   //! Hace una consulta para coger las pelis guardadas
   const filmsSaved: FilmModel[] = [];
   return (
-    <>
-      <h1>Mi videoclub</h1>
-      <p>Aqui irán las pelis del usuario, esta pagina sera UAUUUU</p>
-    </>
+    <AuthGuard
+      children={
+        <>
+          <h1>Mi videoclub</h1>
+          <p>Aqui irán las pelis del usuario, esta pagina sera UAUUUU</p>
+        </>
+      }
+    />
   );
 };
 

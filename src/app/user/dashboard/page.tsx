@@ -19,6 +19,7 @@ import { FilmsTestValues } from "@/testing/DumbData";
 import UpdateUserForm from "./components/UpdateUserForm/UpdateUserForm";
 import UploadFilmForm from "./components/UploadFilmForm/UploadFilmForm";
 import UpdateFilmForm from "./components/UpdateFilmForm/UpdateFilmForm";
+import AuthGuard from "@/components/shared/AuthGuard/AuthGuard";
 
 const DashboardPage = () => {
   const [opened, setOpened] = useState({
@@ -36,48 +37,52 @@ const DashboardPage = () => {
   });
 
   return (
-    <>
-      <div className={styles.dashboard}>
-        <div className={styles.dashboard_user}>
-          <UserCardImage
-            infoUser={[]}
-            onClick={() => setOpened({ ...opened, updateUser: true })}
-          />
-        </div>
+    <AuthGuard
+      children={
+        <div className={styles.dashboard}>
+          <div className={styles.dashboard_user}>
+            <UserCardImage
+              infoUser={[]}
+              onClick={() => setOpened({ ...opened, updateUser: true })}
+            />
+          </div>
 
-        <div className={styles.dashboard_table}>
-          <Button onClick={() => setOpened({ ...opened, uploadNewFilm: true })}>
-            Subir pelicula
-          </Button>
-          <FilmsTable
-            userFilms={FilmsTestValues}
-            onClickTable={() => setOpened({ ...opened, updateFilm: true })}
-          />
-          <Drawer
-            opened={opened.uploadNewFilm}
-            onClose={() => setOpened({ ...opened, uploadNewFilm: false })}
-            position="bottom"
-            size={"90%"}
+          <div className={styles.dashboard_table}>
+            <Button
+              onClick={() => setOpened({ ...opened, uploadNewFilm: true })}
+            >
+              Subir pelicula
+            </Button>
+            <FilmsTable
+              userFilms={FilmsTestValues}
+              onClickTable={() => setOpened({ ...opened, updateFilm: true })}
+            />
+            <Drawer
+              opened={opened.uploadNewFilm}
+              onClose={() => setOpened({ ...opened, uploadNewFilm: false })}
+              position="bottom"
+              size={"90%"}
+            >
+              <UploadFilmForm />
+            </Drawer>
+          </div>
+
+          <Modal
+            opened={opened.updateUser}
+            onClose={() => setOpened({ ...opened, updateUser: false })}
           >
-            <UploadFilmForm />
-          </Drawer>
+            <UpdateUserForm />
+          </Modal>
+          <Modal
+            size={"xl"}
+            opened={opened.updateFilm}
+            onClose={() => setOpened({ ...opened, updateFilm: false })}
+          >
+            <UpdateFilmForm />
+          </Modal>
         </div>
-
-        <Modal
-          opened={opened.updateUser}
-          onClose={() => setOpened({ ...opened, updateUser: false })}
-        >
-          <UpdateUserForm />
-        </Modal>
-        <Modal
-          size={"xl"}
-          opened={opened.updateFilm}
-          onClose={() => setOpened({ ...opened, updateFilm: false })}
-        >
-          <UpdateFilmForm />
-        </Modal>
-      </div>
-    </>
+      }
+    />
   );
 };
 

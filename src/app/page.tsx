@@ -12,34 +12,9 @@ import {
 import Accordion from "@/components/shared/Accordion/Accordion";
 import { AccordionItemType } from "@/components";
 import { TextInputButton } from "@/components/shared/Text-Input-Button";
+import { FAQ, TitleMapDD } from "@/testing/DumbData";
 
 export default function Home() {
-  const groceries: AccordionItemType[] = [
-    {
-      icon: "🍎",
-      value: "Apples",
-      description:
-        "Crisp and refreshing fruit. Apples are known for their versatility and nutritional benefits. They come in a variety of flavors and are great for snacking, baking, or adding to salads.",
-    },
-    {
-      icon: "🍌",
-      value: "Bananas",
-      description:
-        "Naturally sweet and potassium-rich fruit. Bananas are a popular choice for their energy-boosting properties and can be enjoyed as a quick snack, added to smoothies, or used in baking.",
-    },
-    {
-      icon: "🥦",
-      value: "Broccoli",
-      description:
-        "Nutrient-packed green vegetable. Broccoli is packed with vitamins, minerals, and fiber. It has a distinct flavor and can be enjoyed steamed, roasted, or added to stir-fries.",
-    },
-  ];
-  const titleMap = [
-    "Disfruta GRATIS de todo el catálogo de GRETA",
-    "Disfruta GRATIS de todo el catálogo de GRETA",
-    "Disfruta GRATIS de todo el catálogo de GRETA",
-  ];
-
   return (
     <div className={styles.films}>
       <section className={styles.title}>
@@ -61,7 +36,7 @@ export default function Home() {
       <div className={styles.bottom}>
         <PopCorn />
         <div className={styles.title_bottom_text}>
-          {titleMap.map((item) => (
+          {TitleMapDD.map((item) => (
             <Text fw={700} size="xl" fs={"italic"}>
               {item}
             </Text>
@@ -134,7 +109,7 @@ export default function Home() {
             <CrazyGirl />
           </div>
           <div className={styles.faq_content_accordion}>
-            <Accordion items={groceries} variant={"separated"} />
+            <Accordion items={FAQ} variant={"separated"} />
           </div>
         </div>
       </section>
