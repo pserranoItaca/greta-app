@@ -15,16 +15,26 @@ import Image from "next/image";
 import styles from "./RegisterForm.module.scss";
 import { useState } from "react";
 import { UserModel } from "@/infraestructure/models/User";
-import { handleSubmit } from "../../login/components/useLoginForm";
+import useRegisterForm from "./useRegisterForm";
 
 const RegisterForm = () => {
   const [values, setValues] = useState<UserModel>({
     id: "",
     email: "",
     user: "",
-    passOne: "",
-    passTwo: "",
+    pass: "",
+    passAgain: "",
   });
+
+  const { handleSubmit } = useRegisterForm();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
 
   return (
     <div className={styles.register}>
@@ -40,16 +50,14 @@ const RegisterForm = () => {
           <Title>Aquí empieza tu aventura</Title>
           <TextInput
             type="email"
-            value={localStorage.getItem("email") ?? undefined}
             name="email"
             leftSectionPointerEvents="none"
             leftSection={<IconAt />}
             label="Correo electrónico"
             placeholder="Correo electrónico"
             classNames={{ root: styles.root }}
-            onChange={(e) => setValues({ ...values, email: e.target.value })}
+            onChange={(e) => handleChange(e)}
             required
-            // error={test(6)}
           />
           <TextInput
             leftSectionPointerEvents="none"
@@ -57,25 +65,25 @@ const RegisterForm = () => {
             placeholder="Nombre de usuario"
             classNames={{ root: styles.root }}
             name="user"
-            onChange={(e) => setValues({ ...values, user: e.target.value })}
+            onChange={(e) => handleChange(e)}
             required
           />
           <PasswordInput
             label="Contraseña"
-            name="passOne"
+            name="pass"
             placeholder="Contraseña"
             leftSection={<IconLock />}
             classNames={{ root: styles.root }}
-            onChange={(e) => setValues({ ...values, passOne: e.target.value })}
+            onChange={(e) => handleChange(e)}
             required
           />
           <PasswordInput
             label="Repita su contraseña"
-            name="passTwo"
+            name="passAgain"
             placeholder="Repita su contraseña"
             leftSection={<IconLock />}
             classNames={{ root: styles.root }}
-            onChange={(e) => setValues({ ...values, passTwo: e.target.value })}
+            onChange={(e) => handleChange(e)}
             required
           />
           <Checkbox

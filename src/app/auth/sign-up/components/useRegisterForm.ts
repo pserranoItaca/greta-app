@@ -1,19 +1,10 @@
 import { UserModel } from "@/infraestructure/models/User";
 import { FORM_REGEX } from "@/utils/RegExp";
-import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { FormEvent } from "react";
 
 const useRegisterForm = () => {
   const validate = (values: UserModel) => {
-    //   if (!values.email.match(FORM_REGEX.EMAIL)) {
-    //     notifications.show({
-    //       title: "Email incorrecto",
-    //       message: "Por favor, intruduce un correo electrónico válido",
-    //       color: "red",
-    //     });
-    //     return false;
-    //   }
     if (!values.user.match(FORM_REGEX.USER)) {
       notifications.show({
         title: "Usuario incorrecto",
@@ -23,7 +14,7 @@ const useRegisterForm = () => {
       });
       return false;
     }
-    if (!values.passOne.match(FORM_REGEX.PASS)) {
+    if (!values.pass.match(FORM_REGEX.PASS)) {
       notifications.show({
         title: "Contraseña inválida",
         message:
@@ -33,7 +24,7 @@ const useRegisterForm = () => {
       return false;
     }
 
-    if (values.passOne !== values.passTwo) {
+    if (values.pass !== values.passAgain) {
       notifications.show({
         title: "Error en las contraseñas",
         message: "Por favor, introduzca dos contraseñas que coincidan",
@@ -45,12 +36,29 @@ const useRegisterForm = () => {
     return true;
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>, values: UserModel) => {
+  const handleSubmit = async (
+    e: FormEvent<HTMLFormElement>,
+    values: UserModel
+  ) => {
     e.preventDefault();
     if (!validate(values)) return;
-    alert("enviado");
+    try {
+      await fetch("http://localhost:3010/auth/sign-up", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+    } catch (error) {
+      console.error(error);
+      notifications.show({
+        title: "Error",
+        message: "No se ha podido identificar. Inténtelo de nuevo más tarde.",
+        color: "red",
+      });
+    }
   };
-
   return { handleSubmit };
 };
 

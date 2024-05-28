@@ -10,22 +10,31 @@ import {
 } from "@mantine/core";
 import { IconAt, IconLock } from "@tabler/icons-react";
 import Link from "next/link";
-import * as useRegister from "./useLoginForm";
 import { logo } from "../../../../../public/brand";
 import Image from "next/image";
 import styles from "./LoginForm.module.scss";
 import { useState } from "react";
 import { UserModel } from "@/infraestructure/models/User";
+import userLoginForm from "./useLoginForm";
+import { redirect } from "next/navigation";
 
 const LoginForm = () => {
-  const { handleSubmit } = useRegister;
   const [values, setValues] = useState<UserModel>({
     id: "",
     email: "",
     user: "",
-    passOne: "",
-    passTwo: "",
+    pass: "",
+    passAgain: "",
   });
+  const { handleSubmit } = userLoginForm();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
 
   return (
     <div className={styles.login}>
@@ -46,19 +55,18 @@ const LoginForm = () => {
             label="Correo electrónico"
             placeholder="Correo electrónico"
             classNames={{ root: styles.root }}
-            onChange={(e) => setValues({ ...values, email: e.target.value })}
             required
-            // error={test(6)}
+            onChange={(e) => handleChange(e)}
           />
 
           <PasswordInput
             label="Contraseña"
-            name="passOne"
+            name="pass"
             placeholder="Contraseña"
             leftSection={<IconLock />}
             classNames={{ root: styles.root }}
-            onChange={(e) => setValues({ ...values, passOne: e.target.value })}
             required
+            onChange={(e) => handleChange(e)}
           />
 
           <Button type="submit" variant="light">

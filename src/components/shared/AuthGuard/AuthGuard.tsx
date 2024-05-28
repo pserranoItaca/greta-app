@@ -6,9 +6,7 @@ const AuthGuard = ({
 }: {
   children: React.ReactNode;
 }): JSX.Element => {
-  const a = 1;
-  // if (localStorage.getItem("user")) {
-  if (a == 1) {
+  if (localStorage.getItem("user")) {
     return <>{children}</>;
   } else {
     redirect("/");
