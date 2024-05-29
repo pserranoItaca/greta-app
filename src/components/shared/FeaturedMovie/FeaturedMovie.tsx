@@ -11,11 +11,7 @@ const FeaturedMovie = ({
   return (
     <div className={styles.featuredMovie}>
       <div className={styles.featuredMovie_poster}>
-        <img src={poster.src} alt={poster.alt} />
-
-        <Button component="a" href="" size="compact-lg">
-          watch now!
-        </Button>
+        <img src={poster.src} alt={poster.alt} />Ç
       </div>
       <div className={styles.featuredMovie_text}>
         <span className={styles.featuredMovie_text_award}>

@@ -26,7 +26,7 @@ const RegisterForm = () => {
     passAgain: "",
   });
 
-  const { handleSubmit } = useRegisterForm();
+  const { handleSubmit, loading } = useRegisterForm();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -90,7 +90,7 @@ const RegisterForm = () => {
             label="Acepto los términos y condiciones de privacidad"
             required
           />
-          <Button type="submit" variant="light">
+          <Button type="submit" variant="light" loading={loading}>
             Regístrame!
           </Button>
         </form>

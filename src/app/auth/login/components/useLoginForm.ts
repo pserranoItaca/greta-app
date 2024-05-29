@@ -29,6 +29,7 @@ const userLoginForm = () => {
       },
       body: JSON.stringify(values),
     }).then((res) => res.json());
+    console.log(credential);
     return credential;
   };
 
@@ -37,12 +38,19 @@ const userLoginForm = () => {
     values: UserModel
   ) => {
     e.preventDefault();
-    if (!validate(values)) return;
 
     const credetial = await handleLogin(values);
-    if (credetial) {
+    if (credetial[0] !== undefined) {
       localStorage.setItem("user", credetial[0].email);
       window.location.href = "/films";
+    } else {
+      notifications.show({
+        title: "Datos inválidos",
+        message:
+          "No se ha podido verificar su identidad, revise sus datos o intentelo de nuevo mas tarde",
+        color: "red",
+      });
+      return;
     }
   };
 

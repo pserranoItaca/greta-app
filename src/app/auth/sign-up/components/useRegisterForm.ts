@@ -1,9 +1,11 @@
 import { UserModel } from "@/infraestructure/models/User";
 import { FORM_REGEX } from "@/utils/RegExp";
 import { notifications } from "@mantine/notifications";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 
 const useRegisterForm = () => {
+  const [loading, setLoading] = useState(false);
+
   const validate = (values: UserModel) => {
     if (!values.user.match(FORM_REGEX.USER)) {
       notifications.show({
@@ -41,6 +43,7 @@ const useRegisterForm = () => {
     values: UserModel
   ) => {
     e.preventDefault();
+
     if (!validate(values)) return;
     try {
       await fetch("http://localhost:3010/auth/sign-up", {
@@ -59,7 +62,7 @@ const useRegisterForm = () => {
       });
     }
   };
-  return { handleSubmit };
+  return { handleSubmit, loading };
 };
 
 export default useRegisterForm;
