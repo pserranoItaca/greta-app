@@ -115,7 +115,7 @@ export const UserTestValues = [
 ];
 export const FilmsTestValues: FilmModel[] = [
   {
-    id: "1",
+    id: 1,
     id_user: "user123",
     route: "/inception",
     title:
@@ -160,7 +160,7 @@ export const FilmsTestValues: FilmModel[] = [
     actors: "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page",
   },
   {
-    id: "2",
+    id: 2,
     id_user: "user456",
     route: "/the-dark-knight",
     title: "The Dark Knight",
@@ -204,7 +204,7 @@ export const FilmsTestValues: FilmModel[] = [
     actors: "Christian Bale, Heath Ledger, Aaron Eckhart",
   },
   {
-    id: "3",
+    id: 3,
     id_user: "user789",
     route: "/interstellar",
     title: "Interstellar",
@@ -280,7 +280,7 @@ export const FilmGenresTypedDD: GenreModel[] = [
 ];
 
 export const HotelBudapestDD: FilmModel = {
-  id: "1",
+  id: 1,
   id_user: "123",
   route: "/films/the-grand-budapest-hotel",
   title: "The Grand Budapest Hotel",
@@ -326,7 +326,7 @@ export const HotelBudapestDD: FilmModel = {
 };
 export const RomanceFilms: FilmModel[] = [
   {
-    id: "1",
+    id: 1,
     id_user: "123",
     route: "/films/pride-and-prejudice",
     title: "Pride and Prejudice",
@@ -366,7 +366,7 @@ export const RomanceFilms: FilmModel[] = [
       "Keira Knightley, Matthew Macfadyen, Rosamund Pike, Donald Sutherland",
   },
   {
-    id: "2",
+    id: 2,
     id_user: "124",
     route: "/films/la-la-land",
     title: "La La Land",
@@ -405,7 +405,7 @@ export const RomanceFilms: FilmModel[] = [
     actors: "Ryan Gosling, Emma Stone, John Legend, Rosemarie DeWitt",
   },
   {
-    id: "3",
+    id: 3,
     id_user: "125",
     route: "/films/the-notebook",
     title: "The Notebook",
@@ -444,7 +444,7 @@ export const RomanceFilms: FilmModel[] = [
     actors: "Ryan Gosling, Rachel McAdams, James Garner, Gena Rowlands",
   },
   {
-    id: "4",
+    id: 4,
     id_user: "126",
     route: "/films/titanic",
     title: "Titanic",
