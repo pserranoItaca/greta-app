@@ -1,52 +1,64 @@
 "use client";
 
-import { Card, Avatar, Text, Group, Button } from "@mantine/core";
+import { Card, Avatar, Text, Group, Button, em } from "@mantine/core";
 import styles from "./UserCardImage.module.scss";
 import { UserCardImageProps } from "./UserCardImage.types";
 
-const stats = [
-  { value: "34K", label: "Followers" },
-  { value: "187", label: "Follows" },
-  { value: "1.6K", label: "Posts" },
-];
-
-export function UserCardImage({ infoUser, href, onClick }: UserCardImageProps) {
-  const items = stats.map((stat) => (
-    <div key={stat.label}>
-      <Text ta="center" fz="lg" fw={500}>
-        {stat.value}
-      </Text>
-      <Text ta="center" fz="sm" c="dimmed" lh={1}>
-        {stat.label}
-      </Text>
-    </div>
-  ));
-
+export function UserCardImage({
+  email,
+  name,
+  loginDate,
+  filmsUploaded,
+  views,
+  onClick,
+}: UserCardImageProps) {
   return (
     <Card withBorder padding="xl" radius="md" className={styles.card}>
       <Card.Section
-        h={140}
+        h={100}
         style={{
-          backgroundImage:
-            "url(https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80)",
+          background: "#bd6464",
         }}
       />
       <Avatar
         src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-9.png"
-        size={80}
-        radius={80}
+        size={120}
+        radius={120}
         mx="auto"
         mt={-30}
         className={styles.avatar}
       />
       <Text ta="center" fz="lg" fw={500} mt="sm">
-        Bill Headbanger
+        {name}
       </Text>
       <Text ta="center" fz="sm" c="dimmed">
-        Fullstack engineer
+        {email}
       </Text>
       <Group mt="md" justify="center" gap={30}>
-        {items}
+        <div>
+          <Text ta="center" fz="lg" fw={500}>
+            {views}
+          </Text>
+          <Text ta="center" fz="sm" c="dimmed" lh={1}>
+            Visualizaciones totales
+          </Text>
+        </div>{" "}
+        <div>
+          <Text ta="center" fz="lg" fw={500}>
+            {filmsUploaded}
+          </Text>
+          <Text ta="center" fz="sm" c="dimmed" lh={1}>
+            Peliculas subidas
+          </Text>
+        </div>{" "}
+        <div>
+          <Text ta="center" fz="lg" fw={500}>
+            {loginDate}
+          </Text>
+          <Text ta="center" fz="sm" c="dimmed" lh={1}>
+            Fecha de registro
+          </Text>
+        </div>
       </Group>
       <Button
         fullWidth

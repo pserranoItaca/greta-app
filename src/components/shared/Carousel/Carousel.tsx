@@ -27,9 +27,14 @@ const Carousel = ({ items, title }: CarouselProps) => {
         }}
       >
         {items.map((item) => (
-          <MantineCarousel.Slide>
-            <p className={styles.carousel_filmTitle}>Film title</p>
-            <img src={item.poster.src} alt={item.poster.alt} />
+          <MantineCarousel.Slide component={"a"}>
+            <p className={styles.carousel_filmTitle}>{item.title}</p>
+            <a href={`/films/${item.id}`}>
+              <img
+                src="https://m.media-amazon.com/images/I/51zUbui+gbL.jpg"
+                alt="The Grand Budapest Hotel Poster"
+              />
+            </a>
           </MantineCarousel.Slide>
         ))}
       </MantineCarousel>

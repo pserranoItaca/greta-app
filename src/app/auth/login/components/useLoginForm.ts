@@ -5,9 +5,11 @@ import { FORM_REGEX } from "@/utils/RegExp";
 import { notifications } from "@mantine/notifications";
 import { redirect } from "next/navigation";
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 
 const userLoginForm = () => {
+  const [loading, setLoading] = useState(false);
+
   const validate = (values: UserModel) => {
     if (!values.pass.match(FORM_REGEX.PASS)) {
       notifications.show({
@@ -22,15 +24,37 @@ const userLoginForm = () => {
   };
 
   const handleLogin = async (values: UserModel) => {
-    const credential = await fetch("http://localhost:3010/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    }).then((res) => res.json());
-    console.log(credential);
-    return credential;
+    try {
+      const response = await fetch("http://localhost:3010/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        const credential = await response.json();
+        return credential;
+      } else {
+        notifications.show({
+          title: "Datos inválidos",
+          message:
+            "No se ha podido verificar su identidad, revise sus datos o intentelo de nuevo más tarde",
+          color: "red",
+        });
+        return null;
+      }
+    } catch (error) {
+      console.error("Error during login", error);
+      notifications.show({
+        title: "Error",
+        message:
+          "Se ha producido un error, por favor intente de nuevo más tarde",
+        color: "red",
+      });
+      return null;
+    }
   };
 
   const handleSubmit = async (
@@ -39,21 +63,19 @@ const userLoginForm = () => {
   ) => {
     e.preventDefault();
 
-    const credetial = await handleLogin(values);
-    if (credetial[0] !== undefined) {
-      localStorage.setItem("user", credetial[0].email);
+    if (!validate(values)) return;
+    setLoading(true);
+
+    const credential = await handleLogin(values);
+    if (credential && credential.email) {
+      localStorage.setItem("user", credential.email);
+      localStorage.setItem("id", credential.id);
+      setLoading(false);
+
       window.location.href = "/films";
-    } else {
-      notifications.show({
-        title: "Datos inválidos",
-        message:
-          "No se ha podido verificar su identidad, revise sus datos o intentelo de nuevo mas tarde",
-        color: "red",
-      });
-      return;
     }
   };
 
-  return { handleSubmit };
+  return { handleSubmit, loading };
 };
 export default userLoginForm;

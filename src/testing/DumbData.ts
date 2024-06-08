@@ -267,20 +267,20 @@ export const FilmGenres = [
 ];
 
 export const FilmGenresTypedDD: GenreModel[] = [
-  { id: "1", genre: "🎬 Action", route: "action" },
-  { id: "2", genre: "😂 Comedy", route: "comedy" },
-  { id: "3", genre: "😱 Horror", route: "horror" },
-  { id: "4", genre: "❤️ Romance", route: "romance" },
-  { id: "5", genre: "👽 Sci-Fi", route: "sci-fi" },
-  { id: "6", genre: "🕵️‍♂️ Mystery", route: "mystery" },
+  { id: "1", genre: "🎬 Acción", route: "action" },
+  { id: "2", genre: "😂 Comedia", route: "comedy" },
+  { id: "3", genre: "😱 Terror", route: "horror" },
+  { id: "4", genre: "🎀 Romance", route: "romance" },
+  { id: "5", genre: "👽 Ciencia Ficción", route: "sci-fi" },
+  { id: "6", genre: "🕵️‍♂️ Misterio", route: "mystery" },
   { id: "7", genre: "🎭 Drama", route: "drama" },
-  { id: "8", genre: "🏆 Documentary", route: "documentary" },
-  { id: "9", genre: "💼 Crime", route: "crime" },
-  { id: "10", genre: "😢 Tragedy", route: "tragedy" },
+  { id: "8", genre: "🏆 Documental", route: "documentary" },
+  { id: "9", genre: "💼 Crimen", route: "crime" },
+  { id: "10", genre: "😢 Tragedia", route: "tragedy" },
 ];
 
 export const HotelBudapestDD: FilmModel = {
-  id: "1",
+  id: 1,
   id_user: "123",
   route: "/films/the-grand-budapest-hotel",
   title: "The Grand Budapest Hotel",

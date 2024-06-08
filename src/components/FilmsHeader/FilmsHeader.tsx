@@ -13,7 +13,6 @@ import { useState } from "react";
 const FilmsHeader = () => {
   const genres: GenreModel[] = FilmGenresTypedDD;
   const test = genres[1].genre.split(" ")[1].toLocaleLowerCase();
-  console.log(test);
 
   return (
     <>

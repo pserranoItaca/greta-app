@@ -8,14 +8,33 @@ import { Grid, Title } from "@mantine/core";
 import { usePathname } from "next/navigation";
 import styles from "./CategoryFilms.module.scss";
 import AuthGuard from "@/components/shared/AuthGuard/AuthGuard";
+import { Suspense, useEffect, useState } from "react";
 
 const CategoryFilms = () => {
   const pathname = usePathname();
   const slug = pathname.split("/")[3];
+  console.log(slug);
   const genre = FilmGenresTypedDD.find((item) => item.route === slug);
 
-  //! CONSULTA POR CATEGORIA
-  const films = RomanceFilms;
+  const [films, setFilms] = useState<FilmModel[]>();
+
+  useEffect(() => {
+    fetch(`http://localhost:3010/films/category`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ slug }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setFilms(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching films:", error);
+      });
+  }, []);
+  films?.map((film) => console.log(film));
 
   return (
     <AuthGuard
@@ -26,6 +45,7 @@ const CategoryFilms = () => {
           >{`Las mejores películas de ${genre?.genre} ${
             genre?.genre.split(" ")[0]
           }`}</Title>
+
           <Carousel
             height={"100%"}
             withControls={false}
@@ -36,35 +56,19 @@ const CategoryFilms = () => {
             slideSize="33.333333%"
             slidesToScroll={3}
           >
-            {films.map((film) => (
+            {films?.map((film) => (
               <Carousel.Slide>
                 {" "}
                 <Card
                   title={film.title}
-                  text={film.description}
-                  genres={film.genres}
-                  image={{ src: film.poster.src, alt: film.poster.alt }}
-                  href={`/${film.id}`}
+                  text={film.descript}
+                  genre={genre?.route}
+                  // image={{ src: film.poster.src, alt: film.poster.alt }}
+                  href={`/films/${film.id}`}
                 />
               </Carousel.Slide>
             ))}
           </Carousel>
-
-          {/* <Grid style={{ padding: "5px" }}>
-      {films.map((film) => (
-        <>
-          <Grid.Col span={4} style={{ padding: "15px" }}>
-            <Card
-              title={film.title}
-              text={film.description}
-              genres={film.genres}
-              image={{ src: film.poster.src, alt: film.poster.alt }}
-              href={`/${film.id}`}
-            />
-          </Grid.Col>
-        </>
-      ))}
-    </Grid> */}
         </div>
       }
     />

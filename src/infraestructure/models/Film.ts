@@ -3,12 +3,12 @@ import { CommentModel } from "./Comment";
 import { GenreModel } from "./Genre";
 
 export type FilmModel = {
-  id: number;
+  id: string;
   id_user: string;
   route: string;
   title: string;
-  description: string;
-  genres: GenreModel[];
+  descript: string;
+  genre: string;
   poster: ResourceModel;
   views: number;
   rating: number;

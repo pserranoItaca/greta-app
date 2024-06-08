@@ -6,12 +6,12 @@ import { Image, Text, Badge, Button, Group } from "@mantine/core";
 interface CardProps {
   title: string;
   text: string;
-  genres: GenreModel[];
+  genre?: string;
   href: string;
   image?: ResourceModel;
 }
 
-const Card = ({ title, text, genres, href, image }: CardProps) => {
+const Card = ({ title, text, genre, href, image }: CardProps) => {
   return (
     <MantineCard
       shadow="sm"
@@ -28,9 +28,7 @@ const Card = ({ title, text, genres, href, image }: CardProps) => {
 
       <Group justify="center" mt="md" mb="xs">
         <Text fw={500}>{title}</Text>
-        {genres.map((genre) => (
-          <Badge>{genre.genre}</Badge>
-        ))}
+        <Badge>{genre}</Badge>
       </Group>
 
       <Text size="sm" c="dimmed">

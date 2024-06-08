@@ -1,31 +1,50 @@
 import Card from "@/components/shared/Card/Card";
 import Carousel from "@/components/shared/Carousel/Carousel";
 import FeaturedMovie from "@/components/shared/FeaturedMovie/FeaturedMovie";
-import { CarouselDD, HotelBudapestDD } from "@/testing/DumbData";
+import { CarouselDD, FilmGenresTypedDD } from "@/testing/DumbData";
 import styles from "./Films.module.scss";
-import { Title } from "@mantine/core";
-import AuthGuard from "@/components/shared/AuthGuard/AuthGuard";
-import FilmsFeed from "./components/FilmsFeed";
-import { Suspense } from "react";
+import { Divider, Title } from "@mantine/core";
+import useFilms from "./useFilms";
 import { FilmModel } from "@/infraestructure/models/Film";
+import { useState, useEffect } from "react";
 
 const Films = async () => {
-  const response: FilmModel[] = await fetch("http://localhost:3010/films", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then((res) => res.json());
-  console.log(response);
+  const fetchFilms = (slug: string) => {
+    const data = fetch(`http://localhost:3010/films/category`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ slug }),
+    })
+      .then((res) => res.json())
+
+      .catch((error) => {
+        console.error("Error fetching films:", error);
+      });
+    return data;
+  };
+
+  const actionFilms: FilmModel[] = await fetchFilms("action");
+  console.log(actionFilms);
+  const comedyFilms: FilmModel[] = await fetchFilms("comedy");
+  const horrorFilms: FilmModel[] = await fetchFilms("horror");
+  const romanceFilms: FilmModel[] = await fetchFilms("romance");
+  const sciFiFilms: FilmModel[] = await fetchFilms("sci-fi");
+  const mysteryFilms: FilmModel[] = await fetchFilms("mystery");
+  const dramaFilms: FilmModel[] = await fetchFilms("drama");
+  const documentaryFilms: FilmModel[] = await fetchFilms("documentary");
+  const crimeFilms: FilmModel[] = await fetchFilms("crime");
+  const tragedyFilms: FilmModel[] = await fetchFilms("tragedy");
 
   return (
     <>
-      <Carousel title="Tu videoclub" items={CarouselDD} />
-      <Suspense>
-        {response.map((item) => (
-          <p>{item.title}</p>
-        ))}
-      </Suspense>
+      <Carousel
+        title="Las mejores peliculas de 😂 Comedia"
+        items={comedyFilms}
+      />
+      <Divider my="md" />
+
       <div style={{ padding: "2%" }}>
         <FeaturedMovie
           title={"Criando ratas"}
@@ -38,9 +57,23 @@ const Films = async () => {
         />
       </div>
       <section className={styles.topCarousels}>
-        <Carousel title="Las mejores peliculas de miedo" items={CarouselDD} />
-        <Carousel title="Tu videoclub" items={CarouselDD} />
-        <Carousel title="Las mejores peliculas de miedo" items={CarouselDD} />
+        <Carousel
+          title="Las mejores peliculas de 💼 Crimen"
+          items={crimeFilms}
+        />
+        <Divider my="md" />
+
+        <Carousel
+          title="Las mejores peliculas de 🎀 Romance"
+          items={romanceFilms}
+        />
+        <Divider my="md" />
+
+        <Carousel
+          title="Las mejores peliculas de 👽 Ciencia Ficción"
+          items={sciFiFilms}
+        />
+        <Divider my="md" />
       </section>
       <div style={{ padding: "2%" }}>
         <FeaturedMovie
@@ -62,10 +95,24 @@ const Films = async () => {
           }}
         />
       </div>
-      <Carousel title="Las mejores peliculas de miedo" items={CarouselDD} />
+      <Carousel
+        title="Las mejores peliculas de 🕵️‍♂️ Misterio"
+        items={mysteryFilms}
+      />
+      <Divider my="md" />
+
       <section>
-        <Carousel title="Tu videoclub" items={CarouselDD} />
-        <Carousel title="Las mejores peliculas de miedo" items={CarouselDD} />
+        <Carousel
+          title="Las mejores peliculas de 🎭 Drama"
+          items={dramaFilms}
+        />
+        <Divider my="md" />
+
+        <Carousel
+          title="Las mejores peliculas de 😱 Terror"
+          items={horrorFilms}
+        />
+        <Divider my="md" />
       </section>
       <section className={styles.cards}>
         <div className={styles.container} style={{}}>
@@ -73,12 +120,12 @@ const Films = async () => {
           <Title className={styles.wakala}>Nuestra selección de hoy</Title>
           <Title className={styles.wakala}>Nuestra selección de hoy</Title>
         </div>
-        <Suspense>
-          <div style={{ width: "33%" }}>
+        {/* <Suspense>
+          <div style={{ width: "30%" }}>
             <Card
               title={HotelBudapestDD.title}
               text={HotelBudapestDD.description}
-              genres={HotelBudapestDD.genres}
+              // genres={HotelBudapestDD.genres}
               href={HotelBudapestDD.poster.src}
               image={{
                 src: "https://www.w3schools.com/html/pic_trulli.jpg",
@@ -86,11 +133,11 @@ const Films = async () => {
               }}
             />
           </div>
-          <div style={{ width: "33%" }}>
+          <div style={{ width: "30%" }}>
             <Card
               title={HotelBudapestDD.title}
               text={HotelBudapestDD.description}
-              genres={HotelBudapestDD.genres}
+              // genres={HotelBudapestDD.genres}
               href={HotelBudapestDD.poster.src}
               image={{
                 src: "https://www.w3schools.com/html/pic_trulli.jpg",
@@ -98,11 +145,11 @@ const Films = async () => {
               }}
             />
           </div>
-          <div style={{ width: "33.33%" }}>
+          <div style={{ width: "30%", marginRight: "10px" }}>
             <Card
               title={HotelBudapestDD.title}
               text={HotelBudapestDD.description}
-              genres={HotelBudapestDD.genres}
+              // genres={HotelBudapestDD.genres}
               href={HotelBudapestDD.poster.src}
               image={{
                 src: "https://www.w3schools.com/html/pic_trulli.jpg",
@@ -110,8 +157,27 @@ const Films = async () => {
               }}
             />
           </div>
-        </Suspense>
+        </Suspense> */}
       </section>
+      <Carousel
+        title="Las mejores peliculas de 🏆 Documental"
+        items={documentaryFilms}
+      />
+      <Divider my="md" />
+
+      <Carousel
+        title="Las mejores peliculas de 🎬 Acción"
+        items={actionFilms}
+      />
+      <Divider my="md" />
+
+      <Carousel
+        title="Las mejores peliculas de 😢 Tragedia"
+        items={tragedyFilms}
+      />
+      <Divider my="md" />
+
+      <br />
     </>
   );
 };

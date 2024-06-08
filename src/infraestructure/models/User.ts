@@ -1,7 +1,9 @@
-export type UserModel = {
-  id: string;
+import Base from "./Base";
+
+export interface UserModel extends Base {
+  avatar: string;
+  username: string;
   email: string;
-  user: string;
   pass: string;
-  passAgain: string;
-};
+  passAgain?: string;
+}

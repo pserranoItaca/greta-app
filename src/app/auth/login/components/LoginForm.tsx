@@ -19,14 +19,19 @@ import userLoginForm from "./useLoginForm";
 import { redirect } from "next/navigation";
 
 const LoginForm = () => {
+  const { handleSubmit, loading } = userLoginForm();
   const [values, setValues] = useState<UserModel>({
-    id: "",
+    avatar: "",
     email: "",
-    user: "",
+    username: "",
     pass: "",
-    passAgain: "",
+    id: 0,
+    active: false,
+    deleted: false,
+    created_at: "",
+    updated_at: "",
+    deleted_at: null,
   });
-  const { handleSubmit } = userLoginForm();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -69,7 +74,7 @@ const LoginForm = () => {
             onChange={(e) => handleChange(e)}
           />
 
-          <Button type="submit" variant="light">
+          <Button type="submit" variant="light" loading={loading}>
             Acceder!
           </Button>
         </form>

@@ -11,12 +11,37 @@ import {
   IconDoorExit,
   IconUpload,
 } from "@tabler/icons-react";
+import {
+  avatar1,
+  avatar2,
+  avatar3,
+  avatar4,
+  avatar5,
+  avatar6,
+} from "../../../app/auth/sign-up/avatars";
+import Image from "next/image";
 
 const AvatarMenu = ({ ...props }: AvatarMenuProps) => {
+  const selectImage = (id: string) => {
+    if (id === "1") return avatar1;
+    if (id === "2") return avatar2;
+    if (id === "3") return avatar3;
+    if (id === "4") return avatar4;
+    if (id === "5") return avatar5;
+    if (id === "6") return avatar6;
+  };
+
   return (
     <Menu {...props}>
       <Menu.Target>
-        <Avatar className={styles.avatarMenu_avatar} />
+        <Image
+          width={50}
+          height={50}
+          style={{ borderRadius: "50%" }}
+          src={selectImage(localStorage.getItem("avatar") || "4") || avatar4}
+          alt=""
+          className={styles.avatarMenu_avatar}
+        />
       </Menu.Target>
 
       <Menu.Dropdown>

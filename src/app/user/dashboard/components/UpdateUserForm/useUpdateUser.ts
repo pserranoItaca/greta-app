@@ -3,7 +3,7 @@ import { FORM_REGEX } from "@/utils/RegExp";
 import { notifications } from "@mantine/notifications";
 import { FormEvent, useState } from "react";
 
-const useRegisterForm = () => {
+const useUpdateUser = () => {
   const [loading, setLoading] = useState(false);
 
   const validate = (values: UserModel) => {
@@ -45,7 +45,7 @@ const useRegisterForm = () => {
     values: UserModel
   ): Promise<UserModel | null> => {
     try {
-      const response = await fetch("http://localhost:3010/auth/sign-up", {
+      const response = await fetch("http://localhost:3010/auth/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -106,4 +106,4 @@ const useRegisterForm = () => {
   return { handleSubmit, loading };
 };
 
-export default useRegisterForm;
+export default useUpdateUser;

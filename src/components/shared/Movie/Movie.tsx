@@ -6,9 +6,11 @@ import { FilmModel } from "@/infraestructure/models/Film";
 
 interface MovieProps {
   id: string;
+  src: string;
+  // poster: ResourceModel;
 }
 
-const Movie = ({ id }: MovieProps) => {
-  return <Video controls src={getStarted} poster={getStarted.poster} />;
+const Movie = ({ id, src }: MovieProps) => {
+  return <Video controls src={src} />;
 };
 export default Movie;

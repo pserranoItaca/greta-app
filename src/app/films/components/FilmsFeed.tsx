@@ -28,7 +28,6 @@ const FilmsFeed = async () => {
     };
     films.push(film);
   }
-  console.log(films);
 
   return <></>;
 };
