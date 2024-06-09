@@ -47,7 +47,6 @@ const userLoginForm = () => {
         return null;
       }
     } catch (error) {
-      console.error("Error during login", error);
       notifications.show({
         title: "Error",
         message:
@@ -71,7 +70,7 @@ const userLoginForm = () => {
     if (credential && credential.email) {
       localStorage.setItem("user", credential.email);
       localStorage.setItem("avatar", credential.avatar);
-      localStorage.setItem("id", credential.id);
+      localStorage.setItem("user_id", credential.id);
 
       window.location.href = "/films";
     } else {

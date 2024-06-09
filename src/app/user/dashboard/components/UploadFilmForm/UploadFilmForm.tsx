@@ -1,8 +1,12 @@
-import { useRef } from "react";
+"use client";
+
+import { useEffect, useRef } from "react";
 import {
   Button,
+  FileButton,
   Group,
   MultiSelect,
+  Select,
   Tabs,
   TagsInput,
   TextInput,
@@ -12,6 +16,7 @@ import {
 } from "@mantine/core";
 import styles from "./UploadFilmForm.module.scss";
 import {
+  IconArchiveFilled,
   IconEyeQuestion,
   IconArchive,
   IconBrandTeams,
@@ -20,36 +25,35 @@ import {
   IconX,
 } from "@tabler/icons-react";
 import { FormEvent, useState } from "react";
-import { FilmGenres } from "@/testing/DumbData";
-import { Dropzone, MIME_TYPES } from "@mantine/dropzone";
-import theme from "../../../../../../styles/Theme";
-
-type UploadType = {
-  title: string;
-  genres: string[];
-  description: string;
-};
+import { EmptyFilmData, FilmGenres } from "@/testing/DumbData";
+import { FilmModel } from "@/infraestructure/models/Film";
+import useUploadFilmForm from "./useUploadFilmForm";
 
 const UploadFilmForm = () => {
-  const openRef = useRef<() => void>(null);
-  const [info, setInfo] = useState<UploadType>({
-    title: "",
-    description: "",
-    genres: [],
-  });
+  const { handleSubmit, loading } = useUploadFilmForm();
+  const [values, setValues] = useState<FilmModel>(EmptyFilmData);
 
-  const habdleSubmit = (e: FormEvent<HTMLFormElement>, info: UploadType) => {
-    e.preventDefault();
-    console.log(info);
-    alert("enviado");
+  const [filmFile, setFilmFile] = useState<File | null>(null);
+  const [posterFile, setPosterFile] = useState<File | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
   };
+
   return (
     <div className={styles.form}>
       <Title className={styles.title}>Estamos deseando ver tu creación</Title>
       <Title className={styles.subtitle}>
         pero antes debemos saber una serie de cosas...
       </Title>
-      <form className={styles.form} onSubmit={(e) => habdleSubmit(e, info)}>
+      <form
+        className={styles.form}
+        onSubmit={(e) => handleSubmit(e, values, filmFile!)}
+      >
         <Tabs
           defaultValue={"general"}
           classNames={{ root: styles.root, panel: styles.panel }}
@@ -65,79 +69,65 @@ const UploadFilmForm = () => {
               Compártenos el contenido
             </Tabs.Tab>
           </Tabs.List>
+
           <Tabs.Panel value="general">
             <TextInput
               leftSectionPointerEvents="none"
               label="Titulo de tu obra"
               placeholder="Titulo de tu obra"
-              onChange={(e) => setInfo({ ...info, title: e.target.value })}
+              onChange={(e) => handleChange(e)}
               name="title"
               required
             />
 
-            <Textarea
+            <TextInput
               leftSectionPointerEvents="none"
               label="¿De que trata tu obra?"
               placeholder="Descripción de tu creación"
-              name="user"
-              onChange={(e) => setInfo({ ...info, title: e.target.value })}
-              autosize
+              name="descript"
+              onChange={(e) => handleChange(e)}
               required
             />
-            <MultiSelect
-              label="Selecciona los géneros de tu obra"
+            <Select
+              label="Selecciona el genero de tu obra"
+              name="genre"
               placeholder="Selecciona los géneros de tu obra"
               data={FilmGenres}
-            ></MultiSelect>
+              defaultValue={FilmGenres[0]}
+              required
+              onChange={(e) => setValues({ ...values, genre: e! })}
+            ></Select>
           </Tabs.Panel>
           <Tabs.Panel value="uploads">
             {" "}
-            <div className={styles.wrapper}>
-              <Dropzone
-                openRef={openRef}
-                onDrop={() => {}}
-                className={styles.dropzone}
-                radius="md"
-                accept={[MIME_TYPES.mp4]}
-                maxSize={30 * 10000 ** 2}
-              >
-                <div style={{ pointerEvents: "none" }}>
-                  <Group justify="center">
-                    <Dropzone.Accept>
-                      <IconDownload
-                        style={{ width: rem(50), height: rem(50) }}
-                        stroke={1.5}
-                      />
-                    </Dropzone.Accept>
-                    <Dropzone.Reject>
-                      <IconX
-                        style={{ width: rem(50), height: rem(50) }}
-                        stroke={1.5}
-                      />
-                    </Dropzone.Reject>
-                    <Dropzone.Idle>
-                      <IconCloudUpload
-                        style={{ width: rem(50), height: rem(50) }}
-                        stroke={1.5}
-                      />
-                    </Dropzone.Idle>
-                  </Group>
-
-                  <p style={{ textAlign: "center" }}>
-                    Arrastra aqui tu pelicula (solo se admiten mp4)
-                  </p>
-                </div>
-              </Dropzone>
-
-              <Button
-                className={styles.control}
-                size="md"
-                radius="xl"
-                onClick={() => openRef.current?.()}
-              >
-                Select files
-              </Button>
-            </div>
+            <FileButton
+              onChange={(e) => {
+                setFilmFile(e);
+                setValues({ ...values, route: e?.name! });
+                console.log(values);
+              }}
+              accept="video/mp4"
+              name="filmFile"
+            >
+              {(props) => (
+                <Button {...props}>
+                  Sube tu peli! - solo se aceptan archivos mp4
+                </Button>
+              )}
+            </FileButton>
+            {filmFile && <p>Subido: {filmFile.name}</p>}
+            {/* <FileButton
+              onChange={setPosterFile}
+              accept="image/png"
+              name="posterFile"
+            >
+              {(props) => (
+                <Button {...props}>
+                  Sube tu poster! - solo se aceptan archivos png{" "}
+                </Button>
+              )}
+            </FileButton>
+            {posterFile && <p>Subido: {posterFile.name}</p>} */}
           </Tabs.Panel>
           <Tabs.Panel value="people">
             <TextInput
@@ -145,18 +135,21 @@ const UploadFilmForm = () => {
               label="Director"
               placeholder="Director"
               name="director"
+              onChange={(e) => handleChange(e)}
             />{" "}
             <TextInput
               leftSectionPointerEvents="none"
               label="Director de arte"
               placeholder="Director de arte"
               name="art"
+              onChange={(e) => handleChange(e)}
             />{" "}
             <TextInput
               leftSectionPointerEvents="none"
               label="Director de sonido"
               placeholder="Director de sonido"
               name="sound"
+              onChange={(e) => handleChange(e)}
             />
           </Tabs.Panel>
         </Tabs>

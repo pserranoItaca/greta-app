@@ -31,7 +31,6 @@ const VideoClub = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching films:", error);
         setIsLoading(false);
       });
   }, [email]);

@@ -7,25 +7,14 @@ const useUpdateUser = () => {
   const [loading, setLoading] = useState(false);
 
   const validate = (values: UserModel) => {
-    if (!values.username.match(FORM_REGEX.USER)) {
-      notifications.show({
-        title: "Usuario incorrecto",
-        message:
-          "El nombre de usuario solo puede estar formado por letras y números y los caracteres especiales ( . - _ )",
-        color: "red",
-      });
-      return false;
-    }
     if (!values.pass.match(FORM_REGEX.PASS)) {
       notifications.show({
         title: "Contraseña inválida",
-        message:
-          "La contraseña debe contener entre 5 y 15 caracteres y debe contener al menos una letra, un número, un carácter especial ",
+        message: "Parámetros no admitidos",
         color: "red",
       });
       return false;
     }
-
     if (values.pass !== values.passAgain) {
       notifications.show({
         title: "Error en las contraseñas",
@@ -37,14 +26,12 @@ const useUpdateUser = () => {
 
     return true;
   };
-  const redirect = () => {
-    window.location.href = "/films";
-  };
 
   const handleRegister = async (
     values: UserModel
   ): Promise<UserModel | null> => {
     try {
+      console.log;
       const response = await fetch("http://localhost:3010/auth/update", {
         method: "POST",
         headers: {
@@ -58,7 +45,6 @@ const useUpdateUser = () => {
         return credential as UserModel;
       } else {
         const errorResponse = await response.json();
-        console.error("Registration failed", errorResponse);
         notifications.show({
           title: "Error de registro",
           message: errorResponse.message || "No se pudo registrar el usuario",
@@ -67,7 +53,6 @@ const useUpdateUser = () => {
         return null;
       }
     } catch (error) {
-      console.error("Error during registration", error);
       notifications.show({
         title: "Error",
         message:
@@ -83,24 +68,31 @@ const useUpdateUser = () => {
     values: UserModel
   ) => {
     e.preventDefault();
-    console.log(values);
+
     setLoading(true);
 
-    if (!validate(values)) return;
-    setLoading(true);
+    if (!validate(values)) {
+      return setLoading(false);
+    }
 
     const credential = await handleRegister(values);
+    console.log(credential);
 
-    if (credential) {
-      notifications.show({
-        title: "Ecito",
-        message: "Usuario actualizado con éxito",
-        color: "green",
-      });
+    if (credential && credential.email) {
       localStorage.setItem("user", credential.email);
+      localStorage.setItem("user_id", credential.id);
       localStorage.setItem("avatar", credential.avatar);
 
-      redirect();
+      window.location.href = "/films";
+      setLoading(false);
+    } else {
+      setLoading(false);
+      notifications.show({
+        title: "Error",
+        message:
+          "Algo inesperado ha surgido, pongase en contacto con nosotros para solucionarlo",
+        color: "red",
+      });
     }
   };
 

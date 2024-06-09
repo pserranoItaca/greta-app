@@ -19,9 +19,7 @@ const Films = async () => {
     })
       .then((res) => res.json())
 
-      .catch((error) => {
-        console.error("Error fetching films:", error);
-      });
+      .catch((error) => {});
     return data;
   };
 

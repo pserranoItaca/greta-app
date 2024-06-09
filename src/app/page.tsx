@@ -29,7 +29,6 @@ export default function Home() {
           buttonText={"Descubrir"}
           placeholder="Dirección de correo"
           link={"/auth/sign-up"}
-          onChange={(e) => localStorage.setItem("email", e.target.value)}
         />
         <br />
       </section>
@@ -120,7 +119,6 @@ export default function Home() {
           buttonText={"Descubrir"}
           placeholder="Dirección de correo"
           link={"/auth/sign-up"}
-          onChange={(e) => localStorage.setItem("email", e.target.value)}
         />
       </div>
     </div>

@@ -30,9 +30,7 @@ const CategoryFilms = () => {
       .then((data) => {
         setFilms(data);
       })
-      .catch((error) => {
-        console.error("Error fetching films:", error);
-      });
+      .catch((error) => {});
   }, []);
   films?.map((film) => console.log(film));
 

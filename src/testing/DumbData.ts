@@ -1,10 +1,6 @@
-import {
-  AccordionItemType,
-  AccordionProps,
-} from "@/components/shared/Accordion/Accordion.types";
+import { AccordionItemType } from "@/components/shared/Accordion/Accordion.types";
 import { FilmModel } from "@/infraestructure/models/Film";
 import { GenreModel } from "@/infraestructure/models/Genre";
-import { ResourceModel } from "@/utils/Models";
 
 export const FAQ: AccordionItemType[] = [
   {
@@ -58,6 +54,23 @@ export const FilmGenresTypedDD: GenreModel[] = [
   { id: "9", genre: "💼 Crimen", route: "crime" },
   { id: "10", genre: "😢 Tragedia", route: "tragedy" },
 ];
+
+export const EmptyFilmData: FilmModel = {
+  id: "",
+  id_user: localStorage.getItem("user_id") || "",
+  route: "",
+  title: "",
+  descript: "",
+  genre: "",
+  poster: "",
+  views: 0,
+  rating: 0,
+  comments: [],
+  director: "",
+  art: "",
+  sound: "",
+  actors: "",
+};
 
 export const EmptyData: FilmModel[] = [
   {

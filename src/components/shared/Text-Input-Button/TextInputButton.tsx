@@ -7,7 +7,6 @@ const TextInputButton = ({
   buttonText,
   link,
   placeholder = "",
-  onChange,
 }: TextInputButtonProps) => {
   return (
     <div className={styles.container}>
@@ -16,7 +15,6 @@ const TextInputButton = ({
         <TextInput
           className={styles.container_input_text}
           placeholder={placeholder}
-          onChange={onChange}
         />
         <Button variant="filled" size="compact-lg" component="a" href={link}>
           {buttonText}

@@ -44,22 +44,6 @@ export function UserCardImage({
       <Group mt="md" justify="center" gap={30}>
         <div>
           <Text ta="center" fz="lg" fw={500}>
-            {views}
-          </Text>
-          <Text ta="center" fz="sm" c="dimmed" lh={1}>
-            Visualizaciones totales
-          </Text>
-        </div>{" "}
-        <div>
-          <Text ta="center" fz="lg" fw={500}>
-            {filmsUploaded}
-          </Text>
-          <Text ta="center" fz="sm" c="dimmed" lh={1}>
-            Peliculas subidas
-          </Text>
-        </div>{" "}
-        <div>
-          <Text ta="center" fz="lg" fw={500}>
             {loginDate}
           </Text>
           <Text ta="center" fz="sm" c="dimmed" lh={1}>

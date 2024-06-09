@@ -33,7 +33,7 @@ const RegisterForm = () => {
     username: "",
     pass: "",
     passAgain: "",
-    id: 0,
+    id: "0",
     active: true,
     deleted: false,
     created_at: "",

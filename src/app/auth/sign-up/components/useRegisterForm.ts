@@ -58,7 +58,6 @@ const useRegisterForm = () => {
         return credential as UserModel;
       } else {
         const errorResponse = await response.json();
-        console.error("Registration failed", errorResponse);
         notifications.show({
           title: "Error de registro",
           message: errorResponse.message || "No se pudo registrar el usuario",
@@ -67,7 +66,6 @@ const useRegisterForm = () => {
         return null;
       }
     } catch (error) {
-      console.error("Error during registration", error);
       notifications.show({
         title: "Error",
         message:
@@ -97,7 +95,7 @@ const useRegisterForm = () => {
         color: "green",
       });
       localStorage.setItem("user", credential.email);
-      localStorage.setItem("user_id", credential.id.toString());
+      localStorage.setItem("user_id", credential.id);
       localStorage.setItem("avatar", credential.avatar);
 
       redirect();

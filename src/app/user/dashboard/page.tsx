@@ -10,28 +10,18 @@ import {
   avatar5,
   avatar6,
 } from "../../../app/auth/sign-up/avatars";
-import FilmsHeader from "@/components/FilmsHeader/FilmsHeader";
-import {
-  Button,
-  Drawer,
-  Modal,
-  PasswordInput,
-  TextInput,
-  Title,
-} from "@mantine/core";
-import { Suspense, useEffect, useState } from "react";
+import { Button, Drawer, Modal } from "@mantine/core";
+import { useEffect, useState } from "react";
 import FilmsTable from "@/components/shared/FilmsTable/FilmsTable";
 import UpdateUserForm from "./components/UpdateUserForm/UpdateUserForm";
 import UploadFilmForm from "./components/UploadFilmForm/UploadFilmForm";
 import UpdateFilmForm from "./components/UpdateFilmForm/UpdateFilmForm";
 import AuthGuard from "@/components/shared/AuthGuard/AuthGuard";
-import useUserInfo from "./actions/useUserInfo";
 import { UserModel } from "@/infraestructure/models/User";
 import { FilmModel } from "@/infraestructure/models/Film";
-import { type } from "os";
+import DeleteAccountForm from "./components/DeleteAccountForm/DeleteAccountForm";
 
 const DashboardPage = () => {
-  const { getUserInfo } = useUserInfo();
   const [userData, setUserData] = useState<UserModel>();
   const [userFilms, setUserFilms] = useState<FilmModel[]>([
     {
@@ -41,7 +31,7 @@ const DashboardPage = () => {
       title: "",
       descript: "",
       genre: "",
-      poster: { src: "", alt: "" },
+      poster: "",
       views: 0,
       rating: 0,
       comments: [],
@@ -63,6 +53,7 @@ const DashboardPage = () => {
     updateUser: false,
     updateFilm: false,
     uploadNewFilm: false,
+    deletedAccount: false,
   });
 
   useEffect(() => {
@@ -77,9 +68,7 @@ const DashboardPage = () => {
       .then((data) => {
         setUserData(data);
       })
-      .catch((error) => {
-        console.error("Error fetching USER data:", error);
-      });
+      .catch((error) => {});
 
     fetch(`http://localhost:3010/user/dashboard/films/${email}`, {
       method: "GET",
@@ -91,9 +80,7 @@ const DashboardPage = () => {
       .then((data) => {
         setUserFilms(data);
       })
-      .catch((error) => {
-        console.error("Error fetching FILM data:", error);
-      });
+      .catch((error) => {});
   }, []);
 
   const parseDate = (date: string | undefined) => {
@@ -155,7 +142,18 @@ const DashboardPage = () => {
             opened={opened.updateUser}
             onClose={() => setOpened({ ...opened, updateUser: false })}
           >
+            <Button
+              onClick={() => setOpened({ ...opened, deletedAccount: true })}
+            >
+              Borrar cuenta
+            </Button>
             <UpdateUserForm />
+          </Modal>
+          <Modal
+            opened={opened.deletedAccount}
+            onClose={() => setOpened({ ...opened, deletedAccount: false })}
+          >
+            <DeleteAccountForm />
           </Modal>
           <Modal
             size={"xl"}

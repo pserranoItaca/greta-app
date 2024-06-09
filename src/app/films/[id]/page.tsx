@@ -5,6 +5,7 @@ import { FilmModel } from "@/infraestructure/models/Film";
 import {
   ActionIcon,
   Divider,
+  NumberFormatter,
   Pill,
   Rating,
   Tabs,
@@ -70,9 +71,7 @@ const Film = () => {
 
       const isLiked = likedFilmsData.some((film) => film.id === slug);
       setLiked(isLiked);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+    } catch (error) {}
   }, [email, slug]);
 
   useEffect(() => {
@@ -99,9 +98,7 @@ const Film = () => {
       } else {
         setLikedFilms(likedFilms.filter((f) => f.id !== slug));
       }
-    } catch (error) {
-      console.error("Error updating like status:", error);
-    }
+    } catch (error) {}
   };
 
   return (
@@ -130,6 +127,12 @@ const Film = () => {
                     readOnly
                     size={"lg"}
                   />
+                  {/* <NumberFormatter
+                  style={{margin}}
+                    prefix="Visualizaciones: "
+                    value={film.views}
+                    thousandSeparator
+                  /> */}
                 </div>
 
                 <ActionIcon

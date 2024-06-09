@@ -3,5 +3,4 @@ export interface TextInputButtonProps {
   buttonText: string;
   link: string;
   placeholder: string;
-  onChange: (e: any) => void;
 }

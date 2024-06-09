@@ -18,8 +18,8 @@ const UpdateUserForm = () => {
   const { handleSubmit, loading } = useUpdateUser();
 
   const [values, setValues] = useState<UserModel>({
-    id: parseInt(localStorage.getItem("user")!),
-    avatar: localStorage.getItem("avatar")!,
+    id: localStorage.getItem("id")!,
+    avatar: localStorage.getItem("avatar") || "",
     email: localStorage.getItem("user")!,
     username: "",
     pass: "",
@@ -113,7 +113,6 @@ const UpdateUserForm = () => {
         classNames={{ root: styles.root }}
         name="username"
         onChange={(e) => handleChange(e)}
-        required
       />
       <PasswordInput
         label="Contraseña"
