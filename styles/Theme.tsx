@@ -15,6 +15,7 @@ const gretaScheme: MantineColorsTuple = [
 
 const theme = createTheme({
   autoContrast: true,
+
   colors: {
     greta: [
       "#ffeded",
