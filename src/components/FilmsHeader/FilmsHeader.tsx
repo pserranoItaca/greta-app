@@ -5,15 +5,25 @@ import styles from "./FilmsHeader.module.scss";
 import Link from "next/link";
 import { logo } from "../../../public/brand";
 import AvatarMenu from "@/components/shared/AvatarMenu/AvatarMenu";
-import { Button, Menu } from "@mantine/core";
+import {
+  ActionIcon,
+  Button,
+  Group,
+  Menu,
+  useComputedColorScheme,
+  useMantineColorScheme,
+} from "@mantine/core";
 import { FilmGenresTypedDD } from "@/testing/DumbData";
 import { GenreModel } from "@/infraestructure/models/Genre";
 import { useState } from "react";
+import { IconSun, IconMoon } from "@tabler/icons-react";
 
 const FilmsHeader = () => {
   const genres: GenreModel[] = FilmGenresTypedDD;
-  const test = genres[1].genre.split(" ")[1].toLocaleLowerCase();
-
+  const { setColorScheme } = useMantineColorScheme();
+  const computedColorScheme = useComputedColorScheme("light", {
+    getInitialValueInEffect: true,
+  });
   return (
     <>
       <div className={styles.menu}>
@@ -54,13 +64,29 @@ const FilmsHeader = () => {
             </Menu.Dropdown>
           </Menu>
         </div>
-        {localStorage.getItem("user") ? (
-          <AvatarMenu />
-        ) : (
-          <Button component="a" href="/auth/login" target="_blank">
-            Acceder
-          </Button>
-        )}
+        <Group justify="end">
+          <ActionIcon
+            onClick={() =>
+              setColorScheme(computedColorScheme === "light" ? "dark" : "light")
+            }
+            variant="default"
+            size="xl"
+            aria-label="Toggle color scheme"
+          >
+            {computedColorScheme === "dark" ? (
+              <IconSun className={(styles.icon, styles.light)} stroke={1.5} />
+            ) : (
+              <IconMoon className={(styles.icon, styles.dark)} stroke={1.5} />
+            )}
+          </ActionIcon>
+          {localStorage.getItem("user") ? (
+            <AvatarMenu />
+          ) : (
+            <Button component="a" href="/auth/login" target="_blank">
+              Acceder
+            </Button>
+          )}
+        </Group>
       </div>
     </>
   );

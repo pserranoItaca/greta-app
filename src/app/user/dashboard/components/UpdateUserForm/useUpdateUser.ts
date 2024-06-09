@@ -83,6 +83,7 @@ const useUpdateUser = () => {
     values: UserModel
   ) => {
     e.preventDefault();
+    console.log(values);
     setLoading(true);
 
     if (!validate(values)) return;
@@ -92,12 +93,12 @@ const useUpdateUser = () => {
 
     if (credential) {
       notifications.show({
-        title: "Registro exitoso",
-        message: "Usuario registrado con éxito",
+        title: "Ecito",
+        message: "Usuario actualizado con éxito",
         color: "green",
       });
       localStorage.setItem("user", credential.email);
-      localStorage.setItem("avatar", credential.email);
+      localStorage.setItem("avatar", credential.avatar);
 
       redirect();
     }

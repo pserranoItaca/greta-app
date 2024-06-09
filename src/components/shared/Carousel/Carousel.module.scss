@@ -2,6 +2,7 @@
 
 .carousel {
   margin-left: 15px;
+
   &_title {
     font-weight: bold;
     font-style: italic;
@@ -11,7 +12,7 @@
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     z-index: 0;
   }
   &_filmTitle {
@@ -33,8 +34,9 @@
 }
 
 .slide {
-  border: solid black 1px;
+  width: fit-content;
+  // border: solid black 1px;
   display: block;
-  margin-right: 2%;
+  // margin-right: 2%;
   position: relative;
 }

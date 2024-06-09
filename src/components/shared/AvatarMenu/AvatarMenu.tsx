@@ -30,69 +30,82 @@ const AvatarMenu = ({ ...props }: AvatarMenuProps) => {
     if (id === "5") return avatar5;
     if (id === "6") return avatar6;
   };
+  const exitGreta = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("avatar");
+    window.location.href = "/";
+  };
 
-  return (
-    <Menu {...props}>
-      <Menu.Target>
-        <Image
-          width={50}
-          height={50}
-          style={{ borderRadius: "50%" }}
-          src={selectImage(localStorage.getItem("avatar") || "4") || avatar4}
-          alt=""
-          className={styles.avatarMenu_avatar}
-        />
-      </Menu.Target>
+  if (localStorage.getItem("user")) {
+    return (
+      <Menu {...props}>
+        <Menu.Target>
+          <Image
+            width={50}
+            height={50}
+            style={{
+              borderRadius: "50%",
+              border: "solid black 1px",
+            }}
+            src={selectImage(localStorage.getItem("avatar") || "4") || avatar4}
+            alt=""
+            className={styles.avatarMenu_avatar}
+          />
+        </Menu.Target>
 
-      <Menu.Dropdown>
-        <Menu.Label>{"GRETA <3"}</Menu.Label>
-        <Menu.Item
-          leftSection={<IconUser style={{ width: rem(14), height: rem(14) }} />}
-        >
-          <Link
-            className={styles.link}
-            href={"http://localhost:3000/user/dashboard"}
+        <Menu.Dropdown>
+          <Menu.Label>{"GRETA <3"}</Menu.Label>
+          <Menu.Item
+            leftSection={
+              <IconUser style={{ width: rem(14), height: rem(14) }} />
+            }
           >
-            Usuario
-          </Link>
-        </Menu.Item>
-        <Menu.Item
-          leftSection={
-            <IconSettings style={{ width: rem(14), height: rem(14) }} />
-          }
-        >
-          <Link
-            className={styles.link}
-            href={"http://localhost:3000/user/dashboard"}
+            <Link
+              className={styles.link}
+              href={"http://localhost:3000/user/dashboard"}
+            >
+              Usuario
+            </Link>
+          </Menu.Item>
+          <Menu.Item
+            leftSection={
+              <IconSettings style={{ width: rem(14), height: rem(14) }} />
+            }
           >
-            Ajustes
-          </Link>
-        </Menu.Item>
-        <Menu.Item
-          leftSection={
-            <IconUpload style={{ width: rem(14), height: rem(14) }} />
-          }
-        >
-          <Link
-            className={styles.link}
-            href={"http://localhost:3000/user/dashboard"}
+            <Link
+              className={styles.link}
+              href={"http://localhost:3000/user/dashboard"}
+            >
+              Ajustes
+            </Link>
+          </Menu.Item>
+          <Menu.Item
+            leftSection={
+              <IconUpload style={{ width: rem(14), height: rem(14) }} />
+            }
           >
-            Subir contenido
-          </Link>
-        </Menu.Item>
+            <Link
+              className={styles.link}
+              href={"http://localhost:3000/user/dashboard"}
+            >
+              Subir contenido
+            </Link>
+          </Menu.Item>
 
-        <Menu.Divider />
+          <Menu.Divider />
 
-        <Menu.Item
-          color="red"
-          leftSection={
-            <IconDoorExit style={{ width: rem(14), height: rem(14) }} />
-          }
-        >
-          {"Salir de Greta :("}
-        </Menu.Item>
-      </Menu.Dropdown>
-    </Menu>
-  );
+          <Menu.Item
+            color="red"
+            leftSection={
+              <IconDoorExit style={{ width: rem(14), height: rem(14) }} />
+            }
+            onClick={() => exitGreta()}
+          >
+            {"Salir de Greta :("}
+          </Menu.Item>
+        </Menu.Dropdown>
+      </Menu>
+    );
+  }
 };
 export default AvatarMenu;

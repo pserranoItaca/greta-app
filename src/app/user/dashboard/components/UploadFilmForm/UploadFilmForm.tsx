@@ -1,20 +1,28 @@
+import { useRef } from "react";
 import {
   Button,
+  Group,
   MultiSelect,
   Tabs,
   TagsInput,
   TextInput,
   Textarea,
   Title,
+  rem,
 } from "@mantine/core";
 import styles from "./UploadFilmForm.module.scss";
 import {
   IconEyeQuestion,
   IconArchive,
   IconBrandTeams,
+  IconCloudUpload,
+  IconDownload,
+  IconX,
 } from "@tabler/icons-react";
 import { FormEvent, useState } from "react";
 import { FilmGenres } from "@/testing/DumbData";
+import { Dropzone, MIME_TYPES } from "@mantine/dropzone";
+import theme from "../../../../../../styles/Theme";
 
 type UploadType = {
   title: string;
@@ -23,6 +31,7 @@ type UploadType = {
 };
 
 const UploadFilmForm = () => {
+  const openRef = useRef<() => void>(null);
   const [info, setInfo] = useState<UploadType>({
     title: "",
     description: "",
@@ -81,7 +90,55 @@ const UploadFilmForm = () => {
               data={FilmGenres}
             ></MultiSelect>
           </Tabs.Panel>
-          <Tabs.Panel value="uploads">Gallery tab content</Tabs.Panel>
+          <Tabs.Panel value="uploads">
+            {" "}
+            <div className={styles.wrapper}>
+              <Dropzone
+                openRef={openRef}
+                onDrop={() => {}}
+                className={styles.dropzone}
+                radius="md"
+                accept={[MIME_TYPES.mp4]}
+                maxSize={30 * 10000 ** 2}
+              >
+                <div style={{ pointerEvents: "none" }}>
+                  <Group justify="center">
+                    <Dropzone.Accept>
+                      <IconDownload
+                        style={{ width: rem(50), height: rem(50) }}
+                        stroke={1.5}
+                      />
+                    </Dropzone.Accept>
+                    <Dropzone.Reject>
+                      <IconX
+                        style={{ width: rem(50), height: rem(50) }}
+                        stroke={1.5}
+                      />
+                    </Dropzone.Reject>
+                    <Dropzone.Idle>
+                      <IconCloudUpload
+                        style={{ width: rem(50), height: rem(50) }}
+                        stroke={1.5}
+                      />
+                    </Dropzone.Idle>
+                  </Group>
+
+                  <p style={{ textAlign: "center" }}>
+                    Arrastra aqui tu pelicula (solo se admiten mp4)
+                  </p>
+                </div>
+              </Dropzone>
+
+              <Button
+                className={styles.control}
+                size="md"
+                radius="xl"
+                onClick={() => openRef.current?.()}
+              >
+                Select files
+              </Button>
+            </div>
+          </Tabs.Panel>
           <Tabs.Panel value="people">
             <TextInput
               leftSectionPointerEvents="none"

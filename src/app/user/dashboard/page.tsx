@@ -2,6 +2,14 @@
 
 import { UserCardImage } from "@/components/shared/UserCardImage";
 import styles from "./Dashboard.module.scss";
+import {
+  avatar1,
+  avatar2,
+  avatar3,
+  avatar4,
+  avatar5,
+  avatar6,
+} from "../../../app/auth/sign-up/avatars";
 import FilmsHeader from "@/components/FilmsHeader/FilmsHeader";
 import {
   Button,
@@ -13,7 +21,6 @@ import {
 } from "@mantine/core";
 import { Suspense, useEffect, useState } from "react";
 import FilmsTable from "@/components/shared/FilmsTable/FilmsTable";
-import { FilmsTestValues } from "@/testing/DumbData";
 import UpdateUserForm from "./components/UpdateUserForm/UpdateUserForm";
 import UploadFilmForm from "./components/UploadFilmForm/UploadFilmForm";
 import UpdateFilmForm from "./components/UpdateFilmForm/UpdateFilmForm";
@@ -28,7 +35,7 @@ const DashboardPage = () => {
   const [userData, setUserData] = useState<UserModel>();
   const [userFilms, setUserFilms] = useState<FilmModel[]>([
     {
-      id: 0,
+      id: "",
       id_user: "",
       route: "",
       title: "",
@@ -44,7 +51,14 @@ const DashboardPage = () => {
       actors: "",
     },
   ]);
-
+  const selectImage = (id: string) => {
+    if (id === "1") return avatar1;
+    if (id === "2") return avatar2;
+    if (id === "3") return avatar3;
+    if (id === "4") return avatar4;
+    if (id === "5") return avatar5;
+    if (id === "6") return avatar6;
+  };
   const [opened, setOpened] = useState({
     updateUser: false,
     updateFilm: false,
@@ -94,59 +108,65 @@ const DashboardPage = () => {
 
     return;
   };
-  console.log(userFilms);
-  console.log(typeof userFilms);
-  console.log(userData?.username);
 
   return (
-    <div className={styles.dashboard}>
-      <div className={styles.dashboard_user}>
-        <UserCardImage
-          onClick={() => setOpened({ ...opened, updateUser: true })}
-          name={userData?.username || ""}
-          email={userData?.email || ""}
-          loginDate={parseDate(userData?.created_at) || ""}
-          filmsUploaded={0}
-          views={0}
-        />
-      </div>
+    <AuthGuard
+      children={
+        <div className={styles.dashboard}>
+          <div className={styles.dashboard_user}>
+            <UserCardImage
+              onClick={() => setOpened({ ...opened, updateUser: true })}
+              name={userData?.username || ""}
+              email={userData?.email || ""}
+              loginDate={parseDate(userData?.created_at) || ""}
+              filmsUploaded={0}
+              views={0}
+              avatar={
+                selectImage(localStorage.getItem("avatar") || "1") || avatar1
+              }
+            />
+          </div>
 
-      <div className={styles.dashboard_table}>
-        <Button onClick={() => setOpened({ ...opened, uploadNewFilm: true })}>
-          Subir pelicula
-        </Button>
+          <div className={styles.dashboard_table}>
+            <Button
+              onClick={() => setOpened({ ...opened, uploadNewFilm: true })}
+            >
+              Subir pelicula
+            </Button>
 
-        {userFilms[0] && (
-          <FilmsTable
-            films={userFilms && userFilms}
-            onClickTable={() => setOpened({ ...opened, updateFilm: true })}
-          />
-        )}
+            {userFilms[0] && (
+              <FilmsTable
+                films={userFilms && userFilms}
+                onClickTable={() => setOpened({ ...opened, updateFilm: true })}
+              />
+            )}
 
-        <Drawer
-          opened={opened.uploadNewFilm}
-          onClose={() => setOpened({ ...opened, uploadNewFilm: false })}
-          position="bottom"
-          size={"90%"}
-        >
-          <UploadFilmForm />
-        </Drawer>
-      </div>
+            <Drawer
+              opened={opened.uploadNewFilm}
+              onClose={() => setOpened({ ...opened, uploadNewFilm: false })}
+              position="bottom"
+              size={"90%"}
+            >
+              <UploadFilmForm />
+            </Drawer>
+          </div>
 
-      <Modal
-        opened={opened.updateUser}
-        onClose={() => setOpened({ ...opened, updateUser: false })}
-      >
-        <UpdateUserForm />
-      </Modal>
-      <Modal
-        size={"xl"}
-        opened={opened.updateFilm}
-        onClose={() => setOpened({ ...opened, updateFilm: false })}
-      >
-        <UpdateFilmForm />
-      </Modal>
-    </div>
+          <Modal
+            opened={opened.updateUser}
+            onClose={() => setOpened({ ...opened, updateUser: false })}
+          >
+            <UpdateUserForm />
+          </Modal>
+          <Modal
+            size={"xl"}
+            opened={opened.updateFilm}
+            onClose={() => setOpened({ ...opened, updateFilm: false })}
+          >
+            <UpdateFilmForm />
+          </Modal>
+        </div>
+      }
+    ></AuthGuard>
   );
 };
 

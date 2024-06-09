@@ -29,3 +29,25 @@
   flex-direction: column;
   gap: 10px;
 }
+.wrapper {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.dropzone {
+  border-radius: 5px;
+  border: dotted 1px $backGroundDark;
+  border-width: 1px;
+  padding-bottom: 50px;
+}
+
+.icon {
+  color: $backGroundDark;
+}
+
+.control {
+  position: absolute;
+  width: 250px;
+  left: calc(50% - (125px));
+  bottom: -20px;
+}

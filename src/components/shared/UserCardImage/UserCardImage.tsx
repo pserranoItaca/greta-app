@@ -3,10 +3,12 @@
 import { Card, Avatar, Text, Group, Button, em } from "@mantine/core";
 import styles from "./UserCardImage.module.scss";
 import { UserCardImageProps } from "./UserCardImage.types";
+import Image from "next/image";
 
 export function UserCardImage({
   email,
   name,
+  avatar,
   loginDate,
   filmsUploaded,
   views,
@@ -20,12 +22,17 @@ export function UserCardImage({
           background: "#bd6464",
         }}
       />
-      <Avatar
-        src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-9.png"
-        size={120}
-        radius={120}
-        mx="auto"
-        mt={-30}
+      <Image
+        width={150}
+        height={150}
+        style={{
+          borderRadius: "50%",
+          border: "solid black 1px",
+          marginTop: "5px",
+          margin: "auto",
+        }}
+        src={avatar}
+        alt=""
         className={styles.avatar}
       />
       <Text ta="center" fz="lg" fw={500} mt="sm">

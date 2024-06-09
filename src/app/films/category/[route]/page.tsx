@@ -2,7 +2,7 @@
 
 import Card from "@/components/shared/Card/Card";
 import { FilmModel } from "@/infraestructure/models/Film";
-import { FilmGenresTypedDD, RomanceFilms } from "@/testing/DumbData";
+import { FilmGenresTypedDD } from "@/testing/DumbData";
 import { Carousel } from "@mantine/carousel";
 import { Grid, Title } from "@mantine/core";
 import { usePathname } from "next/navigation";
@@ -63,7 +63,7 @@ const CategoryFilms = () => {
                   title={film.title}
                   text={film.descript}
                   genre={genre?.route}
-                  // image={{ src: film.poster.src, alt: film.poster.alt }}
+                  image={film.poster}
                   href={`/films/${film.id}`}
                 />
               </Carousel.Slide>

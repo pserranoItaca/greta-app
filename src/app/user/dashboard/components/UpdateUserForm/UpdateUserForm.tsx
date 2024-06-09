@@ -18,12 +18,12 @@ const UpdateUserForm = () => {
   const { handleSubmit, loading } = useUpdateUser();
 
   const [values, setValues] = useState<UserModel>({
-    avatar: "1",
-    email: "",
+    id: parseInt(localStorage.getItem("user")!),
+    avatar: localStorage.getItem("avatar")!,
+    email: localStorage.getItem("user")!,
     username: "",
     pass: "",
     passAgain: "",
-    id: 0,
     active: true,
     deleted: false,
     created_at: "",
@@ -112,7 +112,7 @@ const UpdateUserForm = () => {
         placeholder="Nombre de usuario"
         classNames={{ root: styles.root }}
         name="username"
-        onChange={(e) => handleAvatarChange(e)}
+        onChange={(e) => handleChange(e)}
         required
       />
       <PasswordInput
@@ -121,7 +121,7 @@ const UpdateUserForm = () => {
         placeholder="Contraseña"
         leftSection={<IconLock />}
         classNames={{ root: styles.root }}
-        onChange={(e) => handleAvatarChange(e)}
+        onChange={(e) => handleChange(e)}
         required
       />
       <PasswordInput
@@ -130,10 +130,12 @@ const UpdateUserForm = () => {
         placeholder="Repita su contraseña"
         leftSection={<IconLock />}
         classNames={{ root: styles.root }}
-        onChange={(e) => handleAvatarChange(e)}
+        onChange={(e) => handleChange(e)}
         required
       />
-      <Button>Actualizar mi perfil</Button>
+      <Button type="submit" loading={loading}>
+        Actualizar mi perfil
+      </Button>
     </form>
   );
 };

@@ -8,7 +8,7 @@ interface CardProps {
   text: string;
   genre?: string;
   href: string;
-  image?: ResourceModel;
+  image?: string;
 }
 
 const Card = ({ title, text, genre, href, image }: CardProps) => {
@@ -22,7 +22,7 @@ const Card = ({ title, text, genre, href, image }: CardProps) => {
     >
       {image && (
         <MantineCard.Section>
-          <Image src={image.src} height={160} alt={image.alt} />
+          <Image src={image} height={"100%"} alt={"image.alt"} />
         </MantineCard.Section>
       )}
 

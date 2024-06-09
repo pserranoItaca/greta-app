@@ -97,7 +97,8 @@ const useRegisterForm = () => {
         color: "green",
       });
       localStorage.setItem("user", credential.email);
-      localStorage.setItem("avatar", credential.email);
+      localStorage.setItem("user_id", credential.id.toString());
+      localStorage.setItem("avatar", credential.avatar);
 
       redirect();
     }

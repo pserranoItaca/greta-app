@@ -24,6 +24,7 @@ const userLoginForm = () => {
   };
 
   const handleLogin = async (values: UserModel) => {
+    console.log(values);
     try {
       const response = await fetch("http://localhost:3010/auth/login", {
         method: "POST",
@@ -62,17 +63,19 @@ const userLoginForm = () => {
     values: UserModel
   ) => {
     e.preventDefault();
-
-    if (!validate(values)) return;
     setLoading(true);
+
+    if (!validate(values)) return setLoading(false);
 
     const credential = await handleLogin(values);
     if (credential && credential.email) {
       localStorage.setItem("user", credential.email);
+      localStorage.setItem("avatar", credential.avatar);
       localStorage.setItem("id", credential.id);
-      setLoading(false);
 
       window.location.href = "/films";
+    } else {
+      setLoading(false);
     }
   };
 

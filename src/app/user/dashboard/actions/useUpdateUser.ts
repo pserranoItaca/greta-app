@@ -68,7 +68,10 @@ const userLoginForm = () => {
 
     const credential = await handleLogin(values);
     if (credential && credential.email) {
-      localStorage.setItem("user", credential);
+      localStorage.setItem("user", credential.email);
+      localStorage.setItem("user_id", credential.id);
+      localStorage.setItem("avatar", credential.avatar);
+
       setLoading(false);
 
       window.location.href = "/films";

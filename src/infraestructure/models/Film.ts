@@ -9,7 +9,7 @@ export type FilmModel = {
   title: string;
   descript: string;
   genre: string;
-  poster: ResourceModel;
+  poster: string;
   views: number;
   rating: number;
   comments: CommentModel[];
