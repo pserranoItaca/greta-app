@@ -2,7 +2,7 @@
 
 import Card from "@/components/shared/Card/Card";
 import { FilmModel } from "@/infraestructure/models/Film";
-import { FilmGenresTypedDD } from "@/testing/DumbData";
+import { EmptyData, FilmGenresTypedDD } from "@/testing/DumbData";
 import { Carousel } from "@mantine/carousel";
 import { Grid, Title } from "@mantine/core";
 import { usePathname } from "next/navigation";
@@ -19,20 +19,13 @@ const CategoryFilms = () => {
   const [films, setFilms] = useState<FilmModel[]>();
 
   useEffect(() => {
-    fetch(`http://localhost:3010/films/category`, {
-      method: "POST",
+    fetch(`http://localhost:3010/films/category/${slug}`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ slug }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setFilms(data);
-      })
-      .catch((error) => {});
+    }).then((res) => res.json().then((data) => setFilms(data)));
   }, []);
-  films?.map((film) => console.log(film));
 
   return (
     <AuthGuard

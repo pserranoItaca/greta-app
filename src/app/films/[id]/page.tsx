@@ -55,7 +55,7 @@ const Film = () => {
       const genresData = await genresResponse.json();
       setGenres(genresData);
 
-      setVideoUrl(`http://localhost:3010/films/resource/es_video_01.mp4`);
+      setVideoUrl(`http://localhost:3010/films/resource/${slug}.mp4`);
 
       const likedFilmsResponse = await fetch(
         `http://localhost:3010/user/dashboard/films/${email}`,

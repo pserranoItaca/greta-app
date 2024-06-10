@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Text } from "@mantine/core";
 
 const Carousel = ({ items, title }: CarouselProps) => {
+  console.log(items);
   return (
     <div className={styles.carousel}>
       <Text className={styles.carousel_title}>{title}</Text>

@@ -70,12 +70,17 @@ const DashboardPage = () => {
       })
       .catch((error) => {});
 
-    fetch(`http://localhost:3010/user/dashboard/films/${email}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `http://localhost:3010/user/dashboard/films/${localStorage.getItem(
+        "user_id"
+      )!}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setUserFilms(data);

@@ -6,12 +6,13 @@ const FeaturedMovie = ({
   title = "https://www.w3schools.com/html/img_chania.jpg",
   award,
   description,
+  href,
   poster,
 }: FeaturedMovieProps) => {
   return (
     <div className={styles.featuredMovie}>
       <div className={styles.featuredMovie_poster}>
-        <img src={poster.src} alt={poster.alt} />Ç
+        <img src={poster.src} alt={poster.alt} />
       </div>
       <div className={styles.featuredMovie_text}>
         <span className={styles.featuredMovie_text_award}>
@@ -23,8 +24,13 @@ const FeaturedMovie = ({
           <p className={styles.featuredMovie_text_description}>{description}</p>
         </div>
 
-        <Button component="a" href="" size="compact-lg" variant="subtle">
-          watch now!
+        <Button
+          component="a"
+          href={`/films/${href}`}
+          size="compact-lg"
+          variant="subtle"
+        >
+          Necesito verla ya!
         </Button>
       </div>
     </div>

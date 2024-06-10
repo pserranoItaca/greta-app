@@ -2,24 +2,29 @@ import Card from "@/components/shared/Card/Card";
 import Carousel from "@/components/shared/Carousel/Carousel";
 import FeaturedMovie from "@/components/shared/FeaturedMovie/FeaturedMovie";
 import styles from "./Films.module.scss";
-import { Divider, Title } from "@mantine/core";
+import { Button, Divider, Title } from "@mantine/core";
 import useFilms from "./useFilms";
 import { FilmModel } from "@/infraestructure/models/Film";
 import { useState, useEffect } from "react";
 import AuthGuard from "@/components/shared/AuthGuard/AuthGuard";
 
 const Films = async () => {
-  const fetchFilms = (slug: string) => {
-    const data = fetch(`http://localhost:3010/films/category`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ slug }),
-    })
-      .then((res) => res.json())
+  const fetchFilms = async (slug: string) => {
+    const response = await fetch(
+      `http://localhost:3010/films/category/${slug}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-      .catch((error) => {});
+    if (!response.ok) {
+      throw new Error(`Failed to fetch films for category: ${slug}`);
+    }
+    const data = (await response.json()) as FilmModel[];
+
     return data;
   };
 
@@ -35,111 +40,108 @@ const Films = async () => {
   const crimeFilms: FilmModel[] = await fetchFilms("crime");
   const tragedyFilms: FilmModel[] = await fetchFilms("tragedy");
 
-  console.log(tragedyFilms);
-
   return (
-    <AuthGuard
-      children={
-        <>
-          <Carousel
-            title="Las mejores peliculas de 😂 Comedia"
-            items={comedyFilms}
-          />
-          <Divider my="md" />
-          <div style={{ padding: "2%" }}>
-            <FeaturedMovie
-              title={"Criando ratas"}
-              award={"most stramed this month"}
-              description={""}
-              poster={{
-                src: "https://www.w3schools.com/html/img_chania.jpg",
-                alt: "alt",
-              }}
-            />
-          </div>
-          <section className={styles.topCarousels}>
+    <>
+      <AuthGuard
+        children={
+          <>
             <Carousel
-              title="Las mejores peliculas de 💼 Crimen"
-              items={crimeFilms}
+              title="Las mejores peliculas de 😂 Comedia"
+              items={comedyFilms}
             />
             <Divider my="md" />
-
-            <Carousel
-              title="Las mejores peliculas de 🎀 Romance"
-              items={romanceFilms}
-            />
-            <Divider my="md" />
-
-            <Carousel
-              title="Las mejores peliculas de 👽 Ciencia Ficción"
-              items={sciFiFilms}
-            />
-            <Divider my="md" />
-          </section>
-          <div style={{ padding: "2%" }}>
-            <FeaturedMovie
-              title={"Criando ratas"}
-              award={"most stramed this month"}
-              description={""}
-              poster={{
-                src: "https://www.w3schools.com/html/img_chania.jpg",
-                alt: "alt",
-              }}
-            />
-            <FeaturedMovie
-              title={"Criando ratas"}
-              award={"most stramed this month"}
-              description={""}
-              poster={{
-                src: "https://www.w3schools.com/html/img_chania.jpg",
-                alt: "alt",
-              }}
-            />
-          </div>
-          <Carousel
-            title="Las mejores peliculas de 🕵️‍♂️ Misterio"
-            items={mysteryFilms}
-          />
-          <Divider my="md" />
-          <section>
-            <Carousel
-              title="Las mejores peliculas de 🎭 Drama"
-              items={dramaFilms}
-            />
-            <Divider my="md" />
-
-            <Carousel
-              title="Las mejores peliculas de 😱 Terror"
-              items={horrorFilms}
-            />
-            <Divider my="md" />
-          </section>
-          <section className={styles.cards}>
-            <div className={styles.container} style={{}}>
-              <Title className={styles.wakala}>Nuestra selección de hoy</Title>
-              <Title className={styles.wakala}>Nuestra selección de hoy</Title>
-              <Title className={styles.wakala}>Nuestra selección de hoy</Title>
+            <div style={{ padding: "2%" }}>
+              <FeaturedMovie
+                href={romanceFilms[0].id}
+                title={romanceFilms[0].title}
+                award={"Seguro que necesitas un poco de..."}
+                description={romanceFilms[0].descript}
+                poster={{
+                  src: romanceFilms[0].poster,
+                  alt: "alt",
+                }}
+              />
             </div>
-          </section>
-          <Carousel
-            title="Las mejores peliculas de 🏆 Documental"
-            items={documentaryFilms}
-          />
-          <Divider my="md" />
-          <Carousel
-            title="Las mejores peliculas de 🎬 Acción"
-            items={actionFilms}
-          />
-          <Divider my="md" />
-          <Carousel
-            title="Las mejores peliculas de 😢 Tragedia"
-            items={tragedyFilms}
-          />
-          <Divider my="md" />
-          <br />
-        </>
-      }
-    ></AuthGuard>
+            <section className={styles.topCarousels}>
+              <Carousel
+                title="Las mejores peliculas de 💼 Crimen"
+                items={crimeFilms}
+              />
+              <Divider my="md" />
+
+              <Carousel
+                title="Las mejores peliculas de 🎀 Romance"
+                items={romanceFilms}
+              />
+              <Divider my="md" />
+
+              <Carousel
+                title="Las mejores peliculas de 👽 Ciencia Ficción"
+                items={sciFiFilms}
+              />
+              <Divider my="md" />
+            </section>
+            <div style={{ padding: "2%" }}>
+              <FeaturedMovie
+                href={tragedyFilms[0].id}
+                title={tragedyFilms[0].title}
+                award={"Dejate sorprender por..."}
+                description={tragedyFilms[0].descript}
+                poster={{
+                  src: tragedyFilms[0].poster,
+                  alt: "alt",
+                }}
+              />
+            </div>
+            <Carousel
+              title="Las mejores peliculas de 🕵️‍♂️ Misterio"
+              items={mysteryFilms}
+            />
+            <Divider my="md" />
+            <section>
+              <Carousel
+                title="Las mejores peliculas de 🎭 Drama"
+                items={dramaFilms}
+              />
+              <Divider my="md" />
+
+              <Carousel
+                title="Las mejores peliculas de 😱 Terror"
+                items={horrorFilms}
+              />
+              <Divider my="md" />
+            </section>
+
+            <Carousel
+              title="Las mejores peliculas de 🏆 Documental"
+              items={documentaryFilms}
+            />
+            <Divider my="md" />
+            <FeaturedMovie
+              href={sciFiFilms[0].id}
+              title={sciFiFilms[0].title}
+              award={"Recomendación del chef!"}
+              description={sciFiFilms[0].descript}
+              poster={{
+                src: sciFiFilms[0].poster,
+                alt: "alt",
+              }}
+            />
+            <Carousel
+              title="Las mejores peliculas de 🎬 Acción"
+              items={actionFilms}
+            />
+            <Divider my="md" />
+            <Carousel
+              title="Las mejores peliculas de 😢 Tragedia"
+              items={tragedyFilms}
+            />
+            <Divider my="md" />
+            <br />
+          </>
+        }
+      ></AuthGuard>
+    </>
   );
 };
 

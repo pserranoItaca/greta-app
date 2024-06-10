@@ -19,7 +19,7 @@ const VideoClub = () => {
       return;
     }
 
-    fetch(`http://localhost:3010/user/dashboard/films/${email}`, {
+    fetch(`http://localhost:3010/user/videoclub/films/${email}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ const VideoClub = () => {
       .catch((error) => {
         setIsLoading(false);
       });
-  }, [email]);
+  }, []);
 
   if (isLoading) {
     return <p>Cargando...</p>;
