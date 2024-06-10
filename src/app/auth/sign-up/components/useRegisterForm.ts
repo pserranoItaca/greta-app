@@ -83,7 +83,7 @@ const useRegisterForm = () => {
     e.preventDefault();
     setLoading(true);
 
-    if (!validate(values)) return;
+    if (!validate(values)) return setLoading(false);
     setLoading(true);
 
     const credential = await handleRegister(values);
@@ -99,6 +99,8 @@ const useRegisterForm = () => {
       localStorage.setItem("avatar", credential.avatar);
 
       redirect();
+    } else {
+      setLoading(false);
     }
   };
 
