@@ -4,22 +4,28 @@ import { GenreModel } from "@/infraestructure/models/Genre";
 
 export const FAQ: AccordionItemType[] = [
   {
-    icon: "🍎",
-    value: "Apples",
+    icon: "📺",
+    value: "¿Cómo me suscribo?",
     description:
-      "Crisp and refreshing fruit. Apples are known for their versatility and nutritional benefits. They come in a variety of flavors and are great for snacking, baking, or adding to salads.",
+      "Para suscribirte a nuestra plataforma, visita nuestra página de registro, elige un plan de suscripción y sigue las instrucciones para crear tu cuenta. Aceptamos varios métodos de pago, incluyendo tarjetas de crédito y débito.",
   },
   {
-    icon: "🍌",
-    value: "Bananas",
+    icon: "🎥",
+    value: "¿Qué contenido está disponible?",
     description:
-      "Naturally sweet and potassium-rich fruit. Bananas are a popular choice for their energy-boosting properties and can be enjoyed as a quick snack, added to smoothies, or used in baking.",
+      "Nuestra plataforma ofrece una amplia variedad de películas, series, documentales y programas exclusivos. Actualizamos nuestro catálogo regularmente para asegurarnos de que siempre encuentres algo nuevo para ver.",
   },
   {
-    icon: "🥦",
-    value: "Broccoli",
+    icon: "💻",
+    value: "¿En qué dispositivos puedo ver contenido?",
     description:
-      "Nutrient-packed green vegetable. Broccoli is packed with vitamins, minerals, and fiber. It has a distinct flavor and can be enjoyed steamed, roasted, or added to stir-fries.",
+      "Puedes disfrutar de nuestro contenido en una variedad de dispositivos, incluyendo smartphones, tabletas, smart TVs, computadoras y consolas de videojuegos. Solo necesitas descargar nuestra aplicación o acceder a nuestro sitio web.",
+  },
+  {
+    icon: "❓",
+    value: "¿Cómo puedo contactar al soporte?",
+    description:
+      "Si necesitas ayuda, puedes contactar a nuestro equipo de soporte a través de nuestro chat en vivo, enviando un correo electrónico a soporte@plataforma.com, o llamando a nuestro número de atención al cliente disponible en nuestra página de contacto.",
   },
 ];
 
@@ -30,16 +36,16 @@ export const TitleMapDD = [
 ];
 
 export const FilmGenres = [
-  "🎬 Action",
-  "😂 Comedy",
-  "😱 Horror",
-  "❤️ Romance",
-  "👽 Sci-Fi",
-  "🕵️‍♂️ Mystery",
-  "🎭 Drama",
-  "🏆 Documentary",
-  "💼 Crime",
-  "😢 Tragedy",
+  "action",
+  "comedy",
+  "horror",
+  "romance",
+  "sci-fi",
+  "mystery",
+  "drama",
+  "documentary",
+  "crime",
+  "tragedy",
 ];
 
 export const FilmGenresTypedDD: GenreModel[] = [
@@ -57,7 +63,7 @@ export const FilmGenresTypedDD: GenreModel[] = [
 
 export const EmptyFilmData: FilmModel = {
   id: "",
-  id_user: localStorage.getItem("user_id") || "",
+  id_user: "",
   route: "",
   title: "",
   descript: "",

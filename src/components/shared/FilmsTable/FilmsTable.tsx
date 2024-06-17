@@ -40,7 +40,11 @@ const FilmsTable = ({ films = [], onClickTable }: UserFilmsProps) => {
               />
             </Table.Td>
             <Table.Td>
-              <Rating value={item.rating} fractions={4} readOnly />
+              <Rating
+                value={item?.rating ? (item?.rating * 5) / 10 : 0}
+                fractions={2}
+                readOnly
+              />
             </Table.Td>
             {/* <Table.Td>{item.comments.length}</Table.Td> */}
             <Table.Td>

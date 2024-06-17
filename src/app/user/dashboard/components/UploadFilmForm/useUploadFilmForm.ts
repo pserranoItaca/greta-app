@@ -47,7 +47,7 @@ const useUploadFilmForm = () => {
         const errorResponse = await response.json();
         notifications.show({
           title: "Error de registro",
-          message: errorResponse.message || "No se pudo registrar el usuario",
+          message: errorResponse.message || "No se pudo registrar el contenido",
           color: "red",
         });
         return null;
@@ -62,6 +62,7 @@ const useUploadFilmForm = () => {
       return null;
     }
   };
+
   const handleSubmit = async (
     e: FormEvent<HTMLFormElement>,
     values: FilmModel,

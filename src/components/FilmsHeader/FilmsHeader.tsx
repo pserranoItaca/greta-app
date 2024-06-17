@@ -15,15 +15,25 @@ import {
 } from "@mantine/core";
 import { FilmGenresTypedDD } from "@/testing/DumbData";
 import { GenreModel } from "@/infraestructure/models/Genre";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconSun, IconMoon } from "@tabler/icons-react";
 
 const FilmsHeader = () => {
   const genres: GenreModel[] = FilmGenresTypedDD;
+  const [loged, setLoged] = useState(false);
   const { setColorScheme } = useMantineColorScheme();
   const computedColorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
   });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Estamos en el navegador, es seguro usar localStorage
+      const loged = localStorage.getItem("user") || "";
+      loged && setLoged(true);
+    }
+  }, []);
+
   return (
     <>
       <div className={styles.menu}>
@@ -79,7 +89,8 @@ const FilmsHeader = () => {
               <IconMoon className={(styles.icon, styles.dark)} stroke={1.5} />
             )}
           </ActionIcon>
-          {localStorage.getItem("user") ? (
+
+          {loged ? (
             <AvatarMenu />
           ) : (
             <Button component="a" href="/auth/login" target="_blank">

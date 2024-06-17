@@ -31,7 +31,23 @@ import useUploadFilmForm from "./useUploadFilmForm";
 
 const UploadFilmForm = () => {
   const { handleSubmit, loading } = useUploadFilmForm();
-  const [values, setValues] = useState<FilmModel>(EmptyFilmData);
+
+  const [values, setValues] = useState<FilmModel>({
+    id: "",
+    id_user: localStorage.getItem("user_id") || "",
+    route: "",
+    title: "",
+    descript: "",
+    genre: "",
+    poster: "",
+    views: 0,
+    rating: 0,
+    comments: [],
+    director: "",
+    art: "",
+    sound: "",
+    actors: "",
+  });
 
   const [filmFile, setFilmFile] = useState<File | null>(null);
   const [posterFile, setPosterFile] = useState<File | null>(null);
@@ -99,7 +115,6 @@ const UploadFilmForm = () => {
             ></Select>
           </Tabs.Panel>
           <Tabs.Panel value="uploads">
-            {" "}
             <FileButton
               onChange={(e) => {
                 setFilmFile(e);
